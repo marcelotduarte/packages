@@ -15,13 +15,16 @@ def normalize(name: str) -> str:
     return re.sub(r"[-_.]+", "-", name).lower()
 
 
-def index_md(directory: Path, base: str, output: Optional[Path]) -> None:
+def index_md(
+        directory: Path, mask: str, base: str, output: Optional[Path]
+    ) -> None:
     normalized_directory = directory.with_name(normalize(directory.name))
     if directory.name != normalized_directory.name:
         directory.rename(normalized_directory)
+    glob_mask = "**/" + mask
     fnames = [
         file.relative_to(normalized_directory).as_posix()
-        for file in normalized_directory.glob("**/*")
+        for file in normalized_directory.glob(glob_mask)
         if file.is_file() and file.name not in EXCLUDED
     ]
     mark = [f"## Links for {base}"]
@@ -36,6 +39,7 @@ def index_md(directory: Path, base: str, output: Optional[Path]) -> None:
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("directory")
+    parser.add_argument("--mask", default="*")
     parser.add_argument("--base")
     parser.add_argument("--output")
     args = parser.parse_args()
@@ -46,7 +50,7 @@ def main():
         output = directory / "index.md"
     else:
         output = Path(args.output)
-    index_md(directory, args.base, output)
+    index_md(directory, args.mask, args.base, output)
 
 
 if __name__ == "__main__":
