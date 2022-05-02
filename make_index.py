@@ -28,7 +28,7 @@ def index_md(
         if file.is_file() and file.name not in EXCLUDED
     ]
     mark = [f"## Links for {base}"]
-    normalized_base = normalize(base)
+    normalized_base = normalized_directory.name
     for name in sorted(fnames):
         mark.append(f"[{name}]({BASE_URL}/{normalized_base}/{name})")
     if output is None:
