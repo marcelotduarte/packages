@@ -1,0 +1,73 @@
+{
+  "info": {
+    "subdir": "osx-arm64"
+  },
+  "packages": {
+    "cx_freeze-6.12.0.dev1-py310h8c01e39_0.tar.bz2": {
+      "build": "py310h8c01e39_0",
+      "build_number": 0,
+      "depends": [
+        "importlib-metadata >=4.8.3",
+        "packaging >=21.0",
+        "python >=3.10,<3.11.0a0",
+        "python >=3.10,<3.11.0a0 *_cpython",
+        "python_abi 3.10.* *_cp310",
+        "setuptools >=59.0.1"
+      ],
+      "license": "PSF-2.0",
+      "license_family": "PSF",
+      "md5": "527222927df18a8394efc6c98a00a029",
+      "name": "cx_freeze",
+      "sha256": "2d30d827c632c82702c9c0d93ea60a17293405a70f98e67ce1529bd4eb2d4dda",
+      "size": 2268985,
+      "subdir": "osx-arm64",
+      "timestamp": 1658569441003,
+      "version": "6.12.0.dev1"
+    },
+    "cx_freeze-6.12.0.dev1-py38hbe6f924_0.tar.bz2": {
+      "build": "py38hbe6f924_0",
+      "build_number": 0,
+      "depends": [
+        "importlib-metadata >=4.8.3",
+        "packaging >=21.0",
+        "python >=3.8,<3.9.0a0",
+        "python >=3.8,<3.9.0a0 *_cpython",
+        "python_abi 3.8.* *_cp38",
+        "setuptools >=59.0.1"
+      ],
+      "license": "PSF-2.0",
+      "license_family": "PSF",
+      "md5": "308375cdc6917c006c6de5e2f5976bc5",
+      "name": "cx_freeze",
+      "sha256": "cb0098c0cf5748f82180453511d87f9654cea1043f60f650240cae7f7b14070c",
+      "size": 2307129,
+      "subdir": "osx-arm64",
+      "timestamp": 1658569516293,
+      "version": "6.12.0.dev1"
+    },
+    "cx_freeze-6.12.0.dev1-py39h4eb3d34_0.tar.bz2": {
+      "build": "py39h4eb3d34_0",
+      "build_number": 0,
+      "depends": [
+        "importlib-metadata >=4.8.3",
+        "packaging >=21.0",
+        "python >=3.9,<3.10.0a0",
+        "python >=3.9,<3.10.0a0 *_cpython",
+        "python_abi 3.9.* *_cp39",
+        "setuptools >=59.0.1"
+      ],
+      "license": "PSF-2.0",
+      "license_family": "PSF",
+      "md5": "8ba91341a296e336931162ca3db2ab5e",
+      "name": "cx_freeze",
+      "sha256": "f6259aab7d3cd91a087557c37eafca8d40e5614401e6cc0b26a48329212139ce",
+      "size": 2606417,
+      "subdir": "osx-arm64",
+      "timestamp": 1658569546501,
+      "version": "6.12.0.dev1"
+    }
+  },
+  "packages.conda": {},
+  "removed": [],
+  "repodata_version": 1
+}

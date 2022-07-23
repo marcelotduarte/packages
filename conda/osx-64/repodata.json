@@ -1,0 +1,90 @@
+{
+  "info": {
+    "subdir": "osx-64"
+  },
+  "packages": {
+    "cx_freeze-6.12.0.dev1-py310h3ba56de_0.tar.bz2": {
+      "build": "py310h3ba56de_0",
+      "build_number": 0,
+      "depends": [
+        "importlib-metadata >=4.8.3",
+        "packaging >=21.0",
+        "python >=3.10,<3.11.0a0",
+        "python_abi 3.10.* *_cp310",
+        "setuptools >=59.0.1"
+      ],
+      "license": "PSF-2.0",
+      "license_family": "PSF",
+      "md5": "446a80a2d1c8d54c7888d40270554381",
+      "name": "cx_freeze",
+      "sha256": "6fd2107bb8f236cf3e4fa5dbcb919c090b408c8adac50fd361856d3f5685f99d",
+      "size": 2779324,
+      "subdir": "osx-64",
+      "timestamp": 1658568938933,
+      "version": "6.12.0.dev1"
+    },
+    "cx_freeze-6.12.0.dev1-py37hc8b4b7a_0.tar.bz2": {
+      "build": "py37hc8b4b7a_0",
+      "build_number": 0,
+      "depends": [
+        "importlib-metadata >=4.8.3",
+        "packaging >=21.0",
+        "python >=3.7,<3.8.0a0",
+        "python_abi 3.7.* *_cp37m",
+        "setuptools >=59.0.1"
+      ],
+      "license": "PSF-2.0",
+      "license_family": "PSF",
+      "md5": "dec3a4884f09749c7b40a2b887144183",
+      "name": "cx_freeze",
+      "sha256": "b99413a4b596bb0fefae2130d6081beeb4b879a079d02d5155c716365aba490a",
+      "size": 2636947,
+      "subdir": "osx-64",
+      "timestamp": 1658569104329,
+      "version": "6.12.0.dev1"
+    },
+    "cx_freeze-6.12.0.dev1-py38h0c4a63c_0.tar.bz2": {
+      "build": "py38h0c4a63c_0",
+      "build_number": 0,
+      "depends": [
+        "importlib-metadata >=4.8.3",
+        "packaging >=21.0",
+        "python >=3.8,<3.9.0a0",
+        "python_abi 3.8.* *_cp38",
+        "setuptools >=59.0.1"
+      ],
+      "license": "PSF-2.0",
+      "license_family": "PSF",
+      "md5": "79ea8ee47617b6afb180b0b4100fb3cc",
+      "name": "cx_freeze",
+      "sha256": "0837d07c14818daade0eef9223ef8160bb60a11120bb4f985ced235d02996163",
+      "size": 3005628,
+      "subdir": "osx-64",
+      "timestamp": 1658568955080,
+      "version": "6.12.0.dev1"
+    },
+    "cx_freeze-6.12.0.dev1-py39hcefdcd2_0.tar.bz2": {
+      "build": "py39hcefdcd2_0",
+      "build_number": 0,
+      "depends": [
+        "importlib-metadata >=4.8.3",
+        "packaging >=21.0",
+        "python >=3.9,<3.10.0a0",
+        "python_abi 3.9.* *_cp39",
+        "setuptools >=59.0.1"
+      ],
+      "license": "PSF-2.0",
+      "license_family": "PSF",
+      "md5": "431c0cdee27271a0d6f5e91f770a96b8",
+      "name": "cx_freeze",
+      "sha256": "facc425a0d53e71fa5e2280f71fc93c96dc2f4efe175bcb029cf4193daba0d03",
+      "size": 2867776,
+      "subdir": "osx-64",
+      "timestamp": 1658568867063,
+      "version": "6.12.0.dev1"
+    }
+  },
+  "packages.conda": {},
+  "removed": [],
+  "repodata_version": 1
+}

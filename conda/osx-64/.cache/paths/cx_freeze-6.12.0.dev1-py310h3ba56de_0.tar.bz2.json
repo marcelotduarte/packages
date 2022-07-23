@@ -1,0 +1,663 @@
+{
+  "paths": [
+    {
+      "_path": "bin/cxfreeze",
+      "file_mode": "text",
+      "path_type": "hardlink",
+      "prefix_placeholder": "/Users/runner/work/freeze-test/freeze-test/miniforge3/conda-bld/cx_freeze_1658568676065/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_",
+      "sha256": "153dcbd1c678b25db446e67824f11f04e8dd4b8000ae52b28497aaa82cddd4f9",
+      "size_in_bytes": 466
+    },
+    {
+      "_path": "bin/cxfreeze-quickstart",
+      "file_mode": "text",
+      "path_type": "hardlink",
+      "prefix_placeholder": "/Users/runner/work/freeze-test/freeze-test/miniforge3/conda-bld/cx_freeze_1658568676065/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_",
+      "sha256": "db76ab3d8f4f85a5686bf689158c01ac0a511e3b025ebd35ea9d778d1df74cfe",
+      "size_in_bytes": 474
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze-6.12.0.dev1.dist-info/INSTALLER",
+      "path_type": "hardlink",
+      "sha256": "d0edee15f91b406f3f99726e44eb990be6e34fd0345b52b910c568e0eef6a2a8",
+      "size_in_bytes": 5
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze-6.12.0.dev1.dist-info/METADATA",
+      "path_type": "hardlink",
+      "sha256": "b05b41c6998933b773383f4685859739a44f032f2f4ce2a0bfad05308ea006df",
+      "size_in_bytes": 5982
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze-6.12.0.dev1.dist-info/RECORD",
+      "path_type": "hardlink",
+      "sha256": "2ae015b887967b024da04e0b743f2151cfde4668802401b86a4d6b713a22f2b8",
+      "size_in_bytes": 13499
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze-6.12.0.dev1.dist-info/REQUESTED",
+      "path_type": "hardlink",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_in_bytes": 0
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze-6.12.0.dev1.dist-info/WHEEL",
+      "path_type": "hardlink",
+      "sha256": "c075cf8dc1753dbbeb6a5ad90197df68145f316f2effb77e2feab7b25212ec6a",
+      "size_in_bytes": 111
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze-6.12.0.dev1.dist-info/direct_url.json",
+      "path_type": "hardlink",
+      "sha256": "06d1283d335af06416be7cac68d51b2d1e8c5495785ab27bf780057839bfc6a9",
+      "size_in_bytes": 126
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze-6.12.0.dev1.dist-info/entry_points.txt",
+      "path_type": "hardlink",
+      "sha256": "96c30c9119c56f976a3f216fb5006c71f619c88e4c6556202904fcbaa9ee1b9f",
+      "size_in_bytes": 97
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze-6.12.0.dev1.dist-info/license.rst",
+      "path_type": "hardlink",
+      "sha256": "06d36b912a7cec953034ac4d6700e4d80a584e12f08e515c97a4a5c5568596be",
+      "size_in_bytes": 2865
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze-6.12.0.dev1.dist-info/top_level.txt",
+      "path_type": "hardlink",
+      "sha256": "2bcb71e2418127f20e196c4360785bf8eceb379be26e5c93380089e63ee772e9",
+      "size_in_bytes": 10
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/__init__.py",
+      "path_type": "hardlink",
+      "sha256": "71d73ff52fd0bc9313c6e858d6efb9271d554be3528d72ed3f309ef4421e8b70",
+      "size_in_bytes": 2180
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/__main__.py",
+      "path_type": "hardlink",
+      "sha256": "17add8ce8a094e243f5264dc4d7afee2e011a419622ae4161bbf38c1d8300e96",
+      "size_in_bytes": 147
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/__pycache__/__init__.cpython-310.pyc",
+      "path_type": "hardlink",
+      "sha256": "48948f94cf37f8bef4350b7c72ed590b322b32e33df0f80432362954d3531dae",
+      "size_in_bytes": 1854
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/__pycache__/__main__.cpython-310.pyc",
+      "path_type": "hardlink",
+      "sha256": "714465ac1452df5f40fdc717957469f01c4b654086974fcd5c93b4cfb68ef940",
+      "size_in_bytes": 320
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/__pycache__/_compat.cpython-310.pyc",
+      "path_type": "hardlink",
+      "sha256": "f7fe3b998f3e015e49cbb4499ea9344cb6b6103f564999aa0c5d23ee3008c953",
+      "size_in_bytes": 1163
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/__pycache__/cli.cpython-310.pyc",
+      "path_type": "hardlink",
+      "sha256": "fef5f1a63f74620da38567934960a6a66372daf81612d02a082e0c9bca178f5c",
+      "size_in_bytes": 10148
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/__pycache__/common.cpython-310.pyc",
+      "path_type": "hardlink",
+      "sha256": "260adc57b5891521888a2d8031dae55fd9f4bfb488d86a05d43cc80367890c8e",
+      "size_in_bytes": 5437
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/__pycache__/darwintools.cpython-310.pyc",
+      "path_type": "hardlink",
+      "sha256": "bcc5a1c22c9ab0507d17349f3662f27b3f96f33eecd71718b7f7eda47dd6e7ae",
+      "size_in_bytes": 19096
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/__pycache__/dist.cpython-310.pyc",
+      "path_type": "hardlink",
+      "sha256": "db56fef51c795a469597f501a85669ddb89e9a6bfb85dcf696d582e5443e2f51",
+      "size_in_bytes": 1911
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/__pycache__/exception.cpython-310.pyc",
+      "path_type": "hardlink",
+      "sha256": "019a24bc4ba567baae2b35f04151997780cafffe2dd5c2bec5743d2851f907be",
+      "size_in_bytes": 1074
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/__pycache__/executable.cpython-310.pyc",
+      "path_type": "hardlink",
+      "sha256": "8f5b09ba98c7815df1e7aaec243ad7187cc56923ec87d361bac8ebcc0042b99f",
+      "size_in_bytes": 6647
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/__pycache__/finder.cpython-310.pyc",
+      "path_type": "hardlink",
+      "sha256": "a4eea68e8aa948467f7a73d7f3194f4457ef850f7ffb6634bf6a8f67e54155ff",
+      "size_in_bytes": 20649
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/__pycache__/freezer.cpython-310.pyc",
+      "path_type": "hardlink",
+      "sha256": "f65fea98dbdce556f8c73e89edcc44b4ea36d342b129076e5decc9a8f85cf3a2",
+      "size_in_bytes": 28832
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/__pycache__/module.cpython-310.pyc",
+      "path_type": "hardlink",
+      "sha256": "925614a6a72227a8a2f729a90a2ccb3d708fb70163fd6f94511dd938b4c4f80f",
+      "size_in_bytes": 8091
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/__pycache__/parser.cpython-310.pyc",
+      "path_type": "hardlink",
+      "sha256": "d3ea84ad41e92737607cb1a5d5ea5c24b6c4d70e1cd0795d7ef19afd886f8ab1",
+      "size_in_bytes": 10096
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/__pycache__/sandbox.cpython-310.pyc",
+      "path_type": "hardlink",
+      "sha256": "4eadf16b1aa099a2e4b4ae438ac2dca3fd77f28b8c83980c77c7f2a832c37414",
+      "size_in_bytes": 1882
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/__pycache__/setupwriter.cpython-310.pyc",
+      "path_type": "hardlink",
+      "sha256": "435f332911a638d7737ac0d35d178355a7dc2396627842932098a32e5d40041b",
+      "size_in_bytes": 3711
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/__pycache__/winmsvcr.cpython-310.pyc",
+      "path_type": "hardlink",
+      "sha256": "daaf1bfa80853672d2c8d523551f6e491b605f1790a19f63712a536f3e54809e",
+      "size_in_bytes": 1984
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/__pycache__/winversioninfo.cpython-310.pyc",
+      "path_type": "hardlink",
+      "sha256": "b254b7c21ec44402235c9192e7c200ffe87630933ef87eabab55b428dcd2f8b8",
+      "size_in_bytes": 8799
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/_compat.py",
+      "path_type": "hardlink",
+      "sha256": "6f35c2daf807739f5a3d6e8b1646a45c829d4867a7102e8599bee2e924eb2758",
+      "size_in_bytes": 935
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/bases/__init__.py",
+      "path_type": "hardlink",
+      "sha256": "b135af4caaf3b3e80218bdf1cfc973a5e61929e826471a7730f05010bcb82d2b",
+      "size_in_bytes": 23
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/bases/__pycache__/__init__.cpython-310.pyc",
+      "path_type": "hardlink",
+      "sha256": "26a0e5d360e26fd215c5845fbf10cca2598666477024720c9dc0e19e50dba71a",
+      "size_in_bytes": 149
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/bases/console-cpython-310-darwin",
+      "path_type": "hardlink",
+      "sha256": "a06977ce6b1fd56058c3d4a2263510ecccc31cbce1e99a9a1a9e36418ae88541",
+      "size_in_bytes": 3921232
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/cli.py",
+      "path_type": "hardlink",
+      "sha256": "c511c13299e4225b50a07a4aa6dbc1135c92fc2b81805aba20574068f2298eed",
+      "size_in_bytes": 13492
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/command/__init__.py",
+      "path_type": "hardlink",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_in_bytes": 0
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/command/__pycache__/__init__.cpython-310.pyc",
+      "path_type": "hardlink",
+      "sha256": "1189ed3616bf828cf3362432767c19d6047acef31c6894b73ec6834787be0618",
+      "size_in_bytes": 151
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/command/__pycache__/_bdist_msi.cpython-310.pyc",
+      "path_type": "hardlink",
+      "sha256": "971484942995921efbe5336999ba701390426b8369f4fd11af1d26f177645e82",
+      "size_in_bytes": 17866
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/command/__pycache__/_pydialog.cpython-310.pyc",
+      "path_type": "hardlink",
+      "sha256": "364c97d9a67c595e03caf011ef0e5dcaa6f7764e68a6b3b62c0d48b5d92c31f1",
+      "size_in_bytes": 2777
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/command/__pycache__/bdist_mac.cpython-310.pyc",
+      "path_type": "hardlink",
+      "sha256": "cae42d4e103021df1a87243dc8227f8d968c0f5861cb131ecd5126fb4931fc1a",
+      "size_in_bytes": 10529
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/command/__pycache__/bdist_msi.cpython-310.pyc",
+      "path_type": "hardlink",
+      "sha256": "69c949c6289f68fbda1c631de1edf2348e9a89e5a8d4d61af277826f6aed3588",
+      "size_in_bytes": 20328
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/command/__pycache__/bdist_rpm.cpython-310.pyc",
+      "path_type": "hardlink",
+      "sha256": "0541a268f3a7e1d8e802b84c9e3e0a1c330e6b3edfb8a24f48b188fd31725d10",
+      "size_in_bytes": 13071
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/command/__pycache__/build.cpython-310.pyc",
+      "path_type": "hardlink",
+      "sha256": "1cd0a593bbc74b4525488c29e0b41b6e59ed40078f25d8b3f534ac298abbeee6",
+      "size_in_bytes": 4462
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/command/__pycache__/build_exe.cpython-310.pyc",
+      "path_type": "hardlink",
+      "sha256": "ee2db3f75edbd3e967463d406fcc60b1ef78960d6eec3bd1071dad791b9cd3a6",
+      "size_in_bytes": 6392
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/command/__pycache__/install.cpython-310.pyc",
+      "path_type": "hardlink",
+      "sha256": "b68d373940054dd0cc2ec78cd1e1110d78d5c52368abfbb9adcc708073dea2e3",
+      "size_in_bytes": 2496
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/command/__pycache__/install_exe.cpython-310.pyc",
+      "path_type": "hardlink",
+      "sha256": "595e9ed9005c1e21b8eba86a33e69556dac4dbb09f9575f75233157cbe5e3e01",
+      "size_in_bytes": 2256
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/command/_bdist_msi.py",
+      "path_type": "hardlink",
+      "sha256": "f627d0fc59a2361a3ee61383e1a9c3323241524b2eb99ca69be0fa278223c5c3",
+      "size_in_bytes": 38737
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/command/_pydialog.py",
+      "path_type": "hardlink",
+      "sha256": "f984cb187014c9eda1adadd61b107f5189c83647091f48372da2ea1b798ec1df",
+      "size_in_bytes": 3098
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/command/bdist_mac.py",
+      "path_type": "hardlink",
+      "sha256": "658d1fae2dca06d9d014c3ff5bb23f9a821a87dc7164e1cbc03e5fdd820da9fe",
+      "size_in_bytes": 16772
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/command/bdist_msi.py",
+      "path_type": "hardlink",
+      "sha256": "16e03919a386827ff2711dc2297ef965bb87bd4c7a5f75ae13ada055c6c6e51a",
+      "size_in_bytes": 35158
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/command/bdist_rpm.py",
+      "path_type": "hardlink",
+      "sha256": "e3175082ff7907855d6627552a81c42b8d411901da2b731b9ff4c05cd078ac66",
+      "size_in_bytes": 23258
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/command/build.py",
+      "path_type": "hardlink",
+      "sha256": "d3a32d4bc78d0beeef35735f3fb5c3bdc612100b1fdf57ba046621eeaaf058e8",
+      "size_in_bytes": 6812
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/command/build_exe.py",
+      "path_type": "hardlink",
+      "sha256": "da706295a12a9315250963b6fdb2d101fba89c029796d844a54949dd020c3d95",
+      "size_in_bytes": 9245
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/command/install.py",
+      "path_type": "hardlink",
+      "sha256": "6611045173a6f753c87f53203e221f0a96d869ef120651dd09d097314e3c3ad1",
+      "size_in_bytes": 2236
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/command/install_exe.py",
+      "path_type": "hardlink",
+      "sha256": "8d8e98f8e42b7e8fd80210590b2d5349a6573d0b350fe11101ad170e22913407",
+      "size_in_bytes": 2144
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/common.py",
+      "path_type": "hardlink",
+      "sha256": "84af4cf2f646059f0f96ba8f3cb64e6b5502b08bced3ca160dcdc331917ed3aa",
+      "size_in_bytes": 5810
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/darwintools.py",
+      "path_type": "hardlink",
+      "sha256": "6d03e3ae69ad0b5c7c3e0305f3bc42a29d3232db47dc3220765484e78a29fbba",
+      "size_in_bytes": 24703
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/dist.py",
+      "path_type": "hardlink",
+      "sha256": "6773546353ed0c8e9904561098408b6a61afd89d2a25d8fd3dea0d0d9b2d592e",
+      "size_in_bytes": 1366
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/exception.py",
+      "path_type": "hardlink",
+      "sha256": "62e0194d8c002566534eb29e4136751be1b39b9c74131380bd34b00682232fae",
+      "size_in_bytes": 485
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/executable.py",
+      "path_type": "hardlink",
+      "sha256": "af92fff58e99a9d090ecfce588868aa7e05a7385483af6b544cbac23773b458f",
+      "size_in_bytes": 6926
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/finder.py",
+      "path_type": "hardlink",
+      "sha256": "a43f8d0dbd3287b6a0b56d7585498ca87acd2556a9e0129561aee35597142f2d",
+      "size_in_bytes": 32990
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/freezer.py",
+      "path_type": "hardlink",
+      "sha256": "e9e1a045f35f92aa3f2089272dd6c386723de03c0f543ad8989a2a0b193fa2d0",
+      "size_in_bytes": 44494
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/hooks/__init__.py",
+      "path_type": "hardlink",
+      "sha256": "f84b1d5114a3182b9189384c48b951b99a3bf6c2ede2a0694ca33e5f9bbf987f",
+      "size_in_bytes": 36569
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/hooks/__pycache__/__init__.cpython-310.pyc",
+      "path_type": "hardlink",
+      "sha256": "489d4936e01eb9313c3529d19b73e0216edad94e49824b62a924f76c63478954",
+      "size_in_bytes": 32703
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/hooks/__pycache__/_qthooks.cpython-310.pyc",
+      "path_type": "hardlink",
+      "sha256": "afbdfa725ee6860edb3087ea54d38b245d219877314930f6de4c0389324371c5",
+      "size_in_bytes": 9858
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/hooks/__pycache__/cv2.cpython-310.pyc",
+      "path_type": "hardlink",
+      "sha256": "587e5b10042f6f3ac786fe0e158c07dbd005a004c1a4cbd64910dbc9ed2432a0",
+      "size_in_bytes": 1737
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/hooks/__pycache__/exclude.cpython-310.pyc",
+      "path_type": "hardlink",
+      "sha256": "8831bcff83172f9f6bd4f6a7c912a1010b5e6139ff23986e88a3afa8ebbe7951",
+      "size_in_bytes": 2459
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/hooks/__pycache__/numpy.cpython-310.pyc",
+      "path_type": "hardlink",
+      "sha256": "f4a31ddea85ad6a18a96e50a1d07ef8c5653fb9f483bc05eb9695557ea48641b",
+      "size_in_bytes": 4162
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/hooks/_qthooks.py",
+      "path_type": "hardlink",
+      "sha256": "1169931db5fe9febd01b7fc5eaa8bb3b2632dbda37611caf6d67f916e430b287",
+      "size_in_bytes": 14183
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/hooks/cv2.py",
+      "path_type": "hardlink",
+      "sha256": "9608153a499f16f3c4197f7158336a70dcb14dba847c2cb1ffe3fd2c3b099848",
+      "size_in_bytes": 2151
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/hooks/exclude.py",
+      "path_type": "hardlink",
+      "sha256": "ddba3e17721554a0d7c387e84f8629ffa84b63eab756dc09ad911ccec8c005b2",
+      "size_in_bytes": 3758
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/hooks/numpy.py",
+      "path_type": "hardlink",
+      "sha256": "0145e6a6929f27a1867a672ad9ab44c3ffb5b40b8ed483290f966c1b6f502582",
+      "size_in_bytes": 4793
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/hooks/pyqt5/__init__.py",
+      "path_type": "hardlink",
+      "sha256": "b5a61d44f6879968ad7447dce6369cc220c9ad4458f172087c7c2a094634da8c",
+      "size_in_bytes": 4471
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/hooks/pyqt5/__pycache__/__init__.cpython-310.pyc",
+      "path_type": "hardlink",
+      "sha256": "74ae3b552dc8c922b6c2f52679871486179abcfa0a29fadfa5c84432dde90628",
+      "size_in_bytes": 3405
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/hooks/pyqt5/__pycache__/add_library.cpython-310.pyc",
+      "path_type": "hardlink",
+      "sha256": "d22c397926b2ee301866e697ba396ac29c31a9d3a1b16750ca4ae96fff3e36cb",
+      "size_in_bytes": 766
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/hooks/pyqt5/__pycache__/debug.cpython-310.pyc",
+      "path_type": "hardlink",
+      "sha256": "199d5a7d5b3d938802fe08ff708a07de45acc4931ff0e185191df4eb3699778d",
+      "size_in_bytes": 950
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/hooks/pyqt5/add_library.py",
+      "path_type": "hardlink",
+      "sha256": "8f191048ed1ccabddbea473db5bcc471270f7479856f15ce9688c254e7dc4bc6",
+      "size_in_bytes": 680
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/hooks/pyqt5/debug.py",
+      "path_type": "hardlink",
+      "sha256": "f044bba7bc30bce8eb842660b328712a0bf8f47e6976995408447317adc34e3b",
+      "size_in_bytes": 787
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/hooks/pyside2/__init__.py",
+      "path_type": "hardlink",
+      "sha256": "01be3e2f61fe19328554c4c7c06bc4858850d918b428accd1522829a8c39dd19",
+      "size_in_bytes": 4256
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/hooks/pyside2/__pycache__/__init__.cpython-310.pyc",
+      "path_type": "hardlink",
+      "sha256": "cc8b3b84fe13f95be32bb9b3ab3f54503396a404b09e06ec0f38dcea4126a99c",
+      "size_in_bytes": 3151
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/hooks/pyside2/__pycache__/debug.cpython-310.pyc",
+      "path_type": "hardlink",
+      "sha256": "3bcde230eb41bc233734ddf571dddd0971101071b985d73bfc7622ff6c7857a5",
+      "size_in_bytes": 945
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/hooks/pyside2/__pycache__/resource.cpython-310.pyc",
+      "path_type": "hardlink",
+      "sha256": "b1c3936e99369c0ddf99e994e7d80ffe126fe52c1e18da96ba605a692657b425",
+      "size_in_bytes": 778
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/hooks/pyside2/debug.py",
+      "path_type": "hardlink",
+      "sha256": "11da5caae64617aee1677798a439450e039bcfc9e35cab727c8460259aaa8064",
+      "size_in_bytes": 782
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/hooks/pyside2/qt.conf",
+      "path_type": "hardlink",
+      "sha256": "b55af477ebd3493ee2e4205ad54ea871c33d0335ce9d310381e066c661998017",
+      "size_in_bytes": 32
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/hooks/pyside2/resource.py",
+      "path_type": "hardlink",
+      "sha256": "13e13de50ee1360cc78143e6e925779ccbf94477e19f354559ebb6da11e54e72",
+      "size_in_bytes": 1117
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/hooks/pyside2/resource.qrc",
+      "path_type": "hardlink",
+      "sha256": "84fe20018afab99eee704d533ae9ae71967fe732106e310319300b13ad81ee71",
+      "size_in_bytes": 92
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/hooks/pyside2/resource.sh",
+      "path_type": "hardlink",
+      "sha256": "ad822fe94203fe18df127ff1904973dce4782f712822f0cda2674a52ae1b4835",
+      "size_in_bytes": 53
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/hooks/pyside6/__init__.py",
+      "path_type": "hardlink",
+      "sha256": "e18b536d9666474efd7c615b34c30d4233d6dd142cabe90e1f7ccdaf35ce16dd",
+      "size_in_bytes": 3621
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/hooks/pyside6/__pycache__/__init__.cpython-310.pyc",
+      "path_type": "hardlink",
+      "sha256": "6f4284fc4c73d0829471858d8a2a026ea912614a8192ea1ac29eb0d83164d0cd",
+      "size_in_bytes": 2843
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/hooks/pyside6/__pycache__/debug.cpython-310.pyc",
+      "path_type": "hardlink",
+      "sha256": "4ba761d7b44914ae6db00c6e29b6e6bde7e60771ca5d1c84d850c6c7ee00136d",
+      "size_in_bytes": 937
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/hooks/pyside6/debug.py",
+      "path_type": "hardlink",
+      "sha256": "96c05a4e2c2a6b721ac9dfa272afe2db59f4bd89585c0f648dd64902e3d1a96c",
+      "size_in_bytes": 774
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/initscripts/__init__.py",
+      "path_type": "hardlink",
+      "sha256": "85330c983a7f92940c4c30f3e5db68d8bf114f20c001b6b3eef372c3e451b6d8",
+      "size_in_bytes": 29
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/initscripts/__pycache__/__init__.cpython-310.pyc",
+      "path_type": "hardlink",
+      "sha256": "21fd73a0f1dcdb353065ff49db6355fd8270155410f922c71bb3aaa266d87e74",
+      "size_in_bytes": 155
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/initscripts/__pycache__/__startup__.cpython-310.pyc",
+      "path_type": "hardlink",
+      "sha256": "28ee8d6fc8721c99b1115abd092901fb1b0dc435303c06a64e990cf652019d84",
+      "size_in_bytes": 3464
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/initscripts/__pycache__/console.cpython-310.pyc",
+      "path_type": "hardlink",
+      "sha256": "ff5ea54fb5fa156ecae558dba6d64bdf13ca5c7ccdf95094ba06558a0c644d57",
+      "size_in_bytes": 573
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/initscripts/__pycache__/consolesetlibpath.cpython-310.pyc",
+      "path_type": "hardlink",
+      "sha256": "ff38059cc76f3bacd4aa9b454890724aba60dbad7ccdfbcbf02fc5ded8868c29",
+      "size_in_bytes": 1170
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/initscripts/__pycache__/sharedlib.cpython-310.pyc",
+      "path_type": "hardlink",
+      "sha256": "b2b71cdc52e7d2405dd830cdbf32e2f18753ac0b3f2e6fd34b9d149efd4970dc",
+      "size_in_bytes": 650
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/initscripts/__pycache__/sharedlibsource.cpython-310.pyc",
+      "path_type": "hardlink",
+      "sha256": "8fcb8beaf6550718555299ed3cd89b951dc3d1dd9fec4e1995110c7a1f2b8567",
+      "size_in_bytes": 966
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/initscripts/__startup__.py",
+      "path_type": "hardlink",
+      "sha256": "fd325f49344432435bf926fda728f5764f1a46598b5f04de2bf7a5ae1609c984",
+      "size_in_bytes": 3978
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/initscripts/console.py",
+      "path_type": "hardlink",
+      "sha256": "e917d058292725954f7eb37ffa5cc42896eab6c247d24a5d727a096d8c7bf35e",
+      "size_in_bytes": 403
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/initscripts/consolesetlibpath.py",
+      "path_type": "hardlink",
+      "sha256": "ad0a534c36f3aa6a744226d84044d31f6b8a635e77867c09a50201dc15408643",
+      "size_in_bytes": 1026
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/initscripts/sharedlib.py",
+      "path_type": "hardlink",
+      "sha256": "d6b6a9a6d537173ff36c4f404bf4323cecc57145cad26534500f2ffddf164a6a",
+      "size_in_bytes": 457
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/initscripts/sharedlibsource.py",
+      "path_type": "hardlink",
+      "sha256": "95992ca9fcec4e9c01282e73545231fb9c419da2c1bafbd78e01d587e4a916cb",
+      "size_in_bytes": 863
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/module.py",
+      "path_type": "hardlink",
+      "sha256": "83741121b4180804a6f721539ececab52c16fe412504dda0ec46e30cd7311550",
+      "size_in_bytes": 9796
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/parser.py",
+      "path_type": "hardlink",
+      "sha256": "e9482bab82e9c4f28c7bce8518ec25a8f5703841dcf09a18f853daafaea84aa0",
+      "size_in_bytes": 10435
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/sandbox.py",
+      "path_type": "hardlink",
+      "sha256": "9a58a0da9646c432facd30f7fc8e37c35d92ad004d6626f87b7a6dc842048100",
+      "size_in_bytes": 1747
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/setupwriter.py",
+      "path_type": "hardlink",
+      "sha256": "4a2584833a249e94f7f65391b8fec6e69519a39eb09627bb0f77f979535347c2",
+      "size_in_bytes": 3903
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/winmsvcr.py",
+      "path_type": "hardlink",
+      "sha256": "ffe34612241e0343f68adad7d6c65d6d0c0115d5c5bd8289b624509d5b2bf227",
+      "size_in_bytes": 2194
+    },
+    {
+      "_path": "lib/python3.10/site-packages/cx_Freeze/winversioninfo.py",
+      "path_type": "hardlink",
+      "sha256": "83043d46243b1aa86a2a1f0ff6a3107a4c598a5dc1a057381ef45fb795c2397a",
+      "size_in_bytes": 11736
+    }
+  ],
+  "paths_version": 1
+}

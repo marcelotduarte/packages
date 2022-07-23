@@ -1,0 +1,106 @@
+{
+  "info": {
+    "subdir": "win-64"
+  },
+  "packages": {
+    "cx_freeze-6.12.0.dev1-py310hf4a77e7_0.tar.bz2": {
+      "build": "py310hf4a77e7_0",
+      "build_number": 0,
+      "depends": [
+        "cx_logging >=3.0",
+        "importlib-metadata >=4.8.3",
+        "packaging >=21.0",
+        "py-lief >=0.11.5",
+        "python >=3.10,<3.11.0a0",
+        "python_abi 3.10.* *_cp310",
+        "setuptools >=59.0.1",
+        "vc >=14.1,<15",
+        "vs2015_runtime >=14.16.27033"
+      ],
+      "license": "PSF-2.0",
+      "license_family": "PSF",
+      "md5": "6cd2ac321346c48c8522cd067ccc21a7",
+      "name": "cx_freeze",
+      "sha256": "33ed6e94905ed20bf5e8d606d00b63fa13624418f0bee9c34d96d20d5e5c2c73",
+      "size": 226307,
+      "subdir": "win-64",
+      "timestamp": 1658568950785,
+      "version": "6.12.0.dev1"
+    },
+    "cx_freeze-6.12.0.dev1-py37hf4a77e7_0.tar.bz2": {
+      "build": "py37hf4a77e7_0",
+      "build_number": 0,
+      "depends": [
+        "cx_logging >=3.0",
+        "importlib-metadata >=4.8.3",
+        "packaging >=21.0",
+        "py-lief >=0.11.5",
+        "python >=3.7,<3.8.0a0",
+        "python_abi 3.7.* *_cp37m",
+        "setuptools >=59.0.1",
+        "vc >=14.1,<15",
+        "vs2015_runtime >=14.16.27033"
+      ],
+      "license": "PSF-2.0",
+      "license_family": "PSF",
+      "md5": "2c80361ca4cb0f6db66155105e207cb9",
+      "name": "cx_freeze",
+      "sha256": "c63544a323cba678de984ed5db97e6fe23ccce49e82241f378105b6955474fbe",
+      "size": 223796,
+      "subdir": "win-64",
+      "timestamp": 1658569147953,
+      "version": "6.12.0.dev1"
+    },
+    "cx_freeze-6.12.0.dev1-py38hf4a77e7_0.tar.bz2": {
+      "build": "py38hf4a77e7_0",
+      "build_number": 0,
+      "depends": [
+        "cx_logging >=3.0",
+        "importlib-metadata >=4.8.3",
+        "packaging >=21.0",
+        "py-lief >=0.11.5",
+        "python >=3.8,<3.9.0a0",
+        "python_abi 3.8.* *_cp38",
+        "setuptools >=59.0.1",
+        "vc >=14.1,<15",
+        "vs2015_runtime >=14.16.27033"
+      ],
+      "license": "PSF-2.0",
+      "license_family": "PSF",
+      "md5": "118727cf9572bb8df8830fad246057eb",
+      "name": "cx_freeze",
+      "sha256": "76aa05913e133689de67af257b8bbe68504371450dba6540eacc4248ffb9e1d5",
+      "size": 224584,
+      "subdir": "win-64",
+      "timestamp": 1658569011665,
+      "version": "6.12.0.dev1"
+    },
+    "cx_freeze-6.12.0.dev1-py39hf4a77e7_0.tar.bz2": {
+      "build": "py39hf4a77e7_0",
+      "build_number": 0,
+      "depends": [
+        "cx_logging >=3.0",
+        "importlib-metadata >=4.8.3",
+        "packaging >=21.0",
+        "py-lief >=0.11.5",
+        "python >=3.9,<3.10.0a0",
+        "python_abi 3.9.* *_cp39",
+        "setuptools >=59.0.1",
+        "vc >=14.1,<15",
+        "vs2015_runtime >=14.16.27033"
+      ],
+      "license": "PSF-2.0",
+      "license_family": "PSF",
+      "md5": "4c805728b1accf6868f48e0120787e5f",
+      "name": "cx_freeze",
+      "sha256": "520a8c54b60639a3621b06b06a1a43f565851ef792cefe4906f3d9aaf9986a21",
+      "size": 224463,
+      "subdir": "win-64",
+      "timestamp": 1658568991436,
+      "version": "6.12.0.dev1"
+    }
+  },
+  "packages.conda": {},
+  "removed": [],
+  "repodata_version": 1
+}
