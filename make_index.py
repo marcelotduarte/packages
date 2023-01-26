@@ -2,10 +2,11 @@
 
 make_index.py </path/to/directory>
 """
+from __future__ import annotations
+
 import argparse
 import re
 from pathlib import Path
-from typing import Optional
 
 EXCLUDED = ("index.md",)
 BASE_URL = "https://marcelotduarte.github.io/packages"
@@ -16,17 +17,18 @@ def normalize(name: str) -> str:
 
 
 def index_md(
-        directory: Path, mask: str, base: str, output: Optional[Path]
+        directory: Path, masks: list[str], base: str, output: Path | None
     ) -> None:
     normalized_directory = directory.with_name(normalize(directory.name))
     if directory.name != normalized_directory.name:
         directory.rename(normalized_directory)
-    glob_mask = "**/" + mask
-    fnames = [
-        file.relative_to(normalized_directory).as_posix()
-        for file in normalized_directory.glob(glob_mask)
-        if file.is_file() and file.name not in EXCLUDED
-    ]
+    fnames = []
+    for mask in masks:
+        fnames += [
+            file.relative_to(normalized_directory).as_posix()
+            for file in normalized_directory.glob("**/" + mask)
+            if file.is_file() and file.name not in EXCLUDED
+        ]
     mark = [f"## Links for {base}"]
     normalized_base = normalized_directory.name
     for name in sorted(fnames):
@@ -39,7 +41,7 @@ def index_md(
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("directory")
-    parser.add_argument("--mask", default="*")
+    parser.add_argument("--mask", action="append")
     parser.add_argument("--base")
     parser.add_argument("--output")
     args = parser.parse_args()
@@ -50,7 +52,7 @@ def main():
         output = directory / "index.md"
     else:
         output = Path(args.output)
-    index_md(directory, args.mask, args.base, output)
+    index_md(directory, args.mask or ["*"], args.base, output)
 
 
 if __name__ == "__main__":
