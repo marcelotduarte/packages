@@ -1,0 +1,15 @@
+name: Build packages [schedule]
+
+on:
+  schedule:
+    # run every day at 8:30AM UTC
+    - cron:  '30 8 * * *'
+
+jobs:
+
+  build_packages:
+    name: Build packages
+    uses: ./.github/workflows/build-packages.yml
+    with:
+      build_cx_logging: true
+      build_lief: false
