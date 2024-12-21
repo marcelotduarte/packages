@@ -1,0 +1,66 @@
+name: Build packages msys2
+
+on:
+  workflow_call:
+    inputs:
+      branch:
+        default: ${{ github.ref }}
+        required: true
+        type: string
+  workflow_dispatch:
+
+jobs:
+
+  build_msys2:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { sys: ucrt64,  env: ucrt-x86_64, icon: '🟨' }
+          - { sys: mingw64, env: x86_64, icon: '🟦' }
+          - { sys: mingw32, env: i686, icon: ⬛' }
+          #- { sys: clang64, env: clang-x86_64, '🟧' }
+    name: Build [${{ matrix.sys }} ${{ matrix.env }}]
+    defaults:
+      run:
+        shell: msys2 {0}
+    env:
+      MINGW_ARCH: ${{ matrix.sys }}
+    runs-on: windows-latest
+    steps:
+
+      - name: '⚙️ git config'
+        run: git config --global core.autocrlf input
+        shell: bash
+
+      - name: '🧰 Checkout'
+        uses: actions/checkout@v4
+
+      - name: '🧰 Checkout'
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.branch }}
+          repository: marcelotduarte/cx_Freeze
+          path: cx_Freeze
+
+      - name: '${{ matrix.icon }} Setup MSYS2'
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: ${{matrix.sys}}
+          install: base-devel
+          update: true
+
+      - name: '🚧 Build package'
+        run: |
+          makepkg-mingw -sCLf --noconfirm --noprogressbar --skippgpcheck
+          mv src/python-cx-freeze-${{ matrix.sys }}/.coverage .coverage.${{ matrix.sys }}
+
+      - name: '📤 Upload artifact: package'
+        uses: actions/upload-artifact@v4
+        with:
+          name: cx-freeze-msys2-${{ matrix.sys }}
+          path: |
+            mingw-w64-*.zst
+            mingw-w64-*.zst.sig
+            .coverage.*
+          include-hidden-files: true
