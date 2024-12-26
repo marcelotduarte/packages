@@ -88,6 +88,8 @@ jobs:
     defaults:
       run:
         shell: bash
+    env:
+      UV_SYSTEM_PYTHON: true
     steps:
 
       - uses: actions/checkout@v4
