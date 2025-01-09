@@ -11,7 +11,7 @@ pkgdesc="Creates standalone executables from Python scripts, with the same perfo
 source=()
 sha256sums=()
 arch=('any')
-mingw_arch=('mingw64' 'ucrt64' 'clang64')
+mingw_arch=('mingw32' 'mingw64' 'ucrt64' 'clang64')
 msys2_references=(
   'pypi: cx-Freeze'
 )
@@ -39,7 +39,6 @@ checkdepends=(
     "${MINGW_PACKAGE_PREFIX}-python-pytest-mock"
     "${MINGW_PACKAGE_PREFIX}-python-pytest-timeout"
     "${MINGW_PACKAGE_PREFIX}-python-pytest-xdist"
-    "${MINGW_PACKAGE_PREFIX}-python-psutil"
 )
 
 prepare() {
