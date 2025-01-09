@@ -74,7 +74,7 @@ jobs:
           sed -i '/url:/c\  git_url: https://github.com/marcelotduarte/cx_Freeze.git' meta.yaml
           sed -i '/sha256:/c\  git_rev: develop' meta.yaml
           sed -i '/patches:/c\  #' meta.yaml
-          sed -i '/.patch/c\  #' meta.yaml
+          sed -i '/\.patch/c\  #' meta.yaml
           echo "meta=$(base64 --wrap=0 meta.yaml)" >> $GITHUB_OUTPUT
           cp meta.yaml meta_path.yaml
           sed -i '/git_url:/c\  path: ./cx_Freeze' meta_path.yaml
