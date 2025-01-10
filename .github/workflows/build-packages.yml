@@ -307,13 +307,13 @@ jobs:
           git push origin :gh-pages || true
           git checkout --orphan gh-pages
 
-      - name: Download all artifacts
+      - name: Download all lief artifacts
+        if: ${{ inputs.build_lief }}
         uses: actions/download-artifact@v4
         with:
-          path: artifacts
-
-      - name: List artifacts
-        run: cd artifacts && ls -l */*
+          path: lief-wheels
+          pattern: lief-*
+          merge-multiple: true
 
       - name: Create index for LIEF
         run: |
@@ -333,7 +333,7 @@ jobs:
           # local build
           if ${{ inputs.build_lief }}; then
             mv lief/index.md lief/dev.md
-            mv artifacts/lief-*/*.whl lief/ || true
+            mv lief-wheels/*.whl lief/ || true
             python create_index.py lief --base LIEF --mask "*.whl"
             mv lief/index.md lief/local.md
             # join
@@ -341,32 +341,49 @@ jobs:
             rm lief/local.md lief/dev.md
           fi
 
+      - name: Download all cx-logging artifacts
+        if: ${{ inputs.build_cx_logging }}
+        uses: actions/download-artifact@v4
+        with:
+          path: cx-logging
+          pattern: cx-logging-*
+          merge-multiple: true
+
       - name: Create index for cx-logging wheels
         if: ${{ inputs.build_cx_logging }}
-        run: |
-          mkdir -p cx-logging
-          mv artifacts/cx-logging-*/* cx-logging/
-          python create_index.py cx-logging --base cx_Logging
+        run: python create_index.py cx-logging --base cx_Logging
+
+      - name: Download all msys2 artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: msys2
+          pattern: cx-freeze-msys2-*
+          merge-multiple: true
 
       - name: Create index for python-cx-freeze (msys2)
-        run: |
-          mkdir -p msys2
-          mv artifacts/cx-freeze-msys2-*/* msys2/
-          python create_index.py msys2 --base python-cx-freeze --mask "*.tar.zst"
+        run: python create_index.py msys2 --base python-cx-freeze --mask "*.tar.zst"
+
+      - name: Download all conda artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: conda
+          name: cx-freeze-conda
 
       - name: Create index for cx_freeze (conda)
-        run: |
-          mv artifacts/cx-freeze-conda conda
-          python create_index.py conda --mask "cx_freeze*.conda" --mask "cx_freeze*.tar.bz2"
+        run: python create_index.py conda --mask "cx_freeze*.conda" --mask "cx_freeze*.tar.bz2"
+
+      - name: Download all cx_Freeze artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: cx-freeze
+          pattern: cx-freeze-whl-*
+          merge-multiple: true
 
       - name: Create index for cx_Freeze wheels
-        run: |
-          mkdir -p cx-freeze
-          cp artifacts/cx-freeze-whl-*/* cx-freeze/
-          python create_index.py cx-freeze --base cx_Freeze
+        run: python create_index.py cx-freeze --base cx_Freeze
 
       - name: Cleanup
-        run: rm -rf artifacts create_index.py
+        run: rm -rf lief-wheels *.py *.md PKGBUILD
 
       - name: Create packages template
         run: |

@@ -4,23 +4,19 @@ on:
   workflow_call:
   workflow_dispatch:
 
-env:
-  python-version: '3.13'
-
 jobs:
-  build_wheel:
-    name: Build cx_Logging [${{ matrix.os }}-${{ matrix.arch }}]
+  build_wheels:
+    name: Build wheels on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
         os: [windows-latest]
-        arch: ['x64', 'x86']
     defaults:
       run:
         shell: bash
-
     steps:
+
       - uses: actions/checkout@v4
         with:
           repository: marcelotduarte/cx_Logging
@@ -28,18 +24,18 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           cache: 'pip'
-          python-version: ${{ env.python-version }}
-          architecture: ${{ matrix.arch }}
-          allow-prereleases: true
-
-      - name: Install dependencies
-        run: python -m pip install --upgrade pip build setuptools wheel
+          python-version: '3.12'
 
       - name: Build wheels
-        run: python -m build . --wheel -o wheelhouse -x -n
+        run: |
+          python -m pip install --upgrade cibuildwheel
+          cibuildwheel --output-dir wheelhouse
+        env:
+          CIBW_ENABLE: cpython-freethreading
+          CIBW_BUILD: cp313*
 
       - name: Upload the artifact
         uses: actions/upload-artifact@v4
         with:
-          name: cx-logging-wheelhouse-${{ matrix.arch }}
+          name: cx-logging-${{ matrix.os }}
           path: wheelhouse
