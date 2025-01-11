@@ -1,0 +1,410 @@
+name: Build packages
+
+on:
+  workflow_call:
+    inputs:
+      build_cx_logging:
+        default: true
+        required: false
+        type: boolean
+      build_lief:
+        default: false
+        required: false
+        type: boolean
+  workflow_dispatch:
+    inputs:
+      build_cx_logging:
+        default: false
+        required: false
+        type: boolean
+      build_lief:
+        default: false
+        required: false
+        type: boolean
+
+jobs:
+
+  build_wheel:
+    name: Build wheels
+    uses: ./.github/workflows/build-wheel.yml
+    with:
+      branch: develop
+
+  build_msys2:
+    name: Build msys2
+    uses: ./.github/workflows/build-packages-msys2.yml
+    with:
+      branch: develop
+
+  build_wheel_cx_logging:
+    name: Build cx_Logging
+    if: ${{ inputs.build_cx_logging }}
+    uses: ./.github/workflows/build-wheel-cxl.yml
+
+  build_wheel_lief:
+    name: Build LIEF
+    if: ${{ inputs.build_lief }}
+    uses: ./.github/workflows/build-wheel-lief.yml
+
+  conda_recipe:
+    name: Generate conda-forge recipe
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          repository: marcelotduarte/cx_freeze-feedstock
+
+      - uses: actions/checkout@v4
+        with:
+          ref: develop
+          repository: marcelotduarte/cx_Freeze
+          path: recipe/cx_Freeze
+
+      - name: Prepare recipe
+        id: recipe
+        working-directory: recipe
+        run: |
+          pushd cx_Freeze/cx_Freeze
+          VERSION=$(grep "__version__ = " __init__.py | sed 's/-/./' | awk -F\" '{print $2}')
+          popd
+          sed -i "/set version/c\{% set version = \"$VERSION\" %}" meta.yaml
+          sed -i '/number:/c\  number: 0' meta.yaml
+          sed -i '/url:/c\  git_url: https://github.com/marcelotduarte/cx_Freeze.git' meta.yaml
+          sed -i '/sha256:/c\  git_rev: develop' meta.yaml
+          sed -i '/patches:/c\  #' meta.yaml
+          sed -i '/\.patch/c\  #' meta.yaml
+          echo "meta=$(base64 --wrap=0 meta.yaml)" >> $GITHUB_OUTPUT
+          cp meta.yaml meta_path.yaml
+          sed -i '/git_url:/c\  path: ./cx_Freeze' meta_path.yaml
+          sed -i '/git_rev:/c\  #' meta_path.yaml
+          echo "meta_path=$(base64 --wrap=0 meta_path.yaml)" >> $GITHUB_OUTPUT
+          git diff
+
+      - name: List 'unix' configurations
+        id: unix
+        run: |
+          CONFIGS=""
+          for CONFIG in .ci_support/linux_*.yaml; do
+            name=${CONFIG:12:-5}
+            python_and_version=$(echo $name|awk -F_ '{print $3}')
+            version="${python_and_version:8:-1}"
+            CONFIGS="${CONFIGS}{\"name\":\"${name}\",\"version\":\"${version}\",\"os\":\"ubuntu\"}, "
+          done
+          for CONFIG in .ci_support/osx_*.yaml; do
+            name=${CONFIG:12:-5}
+            python_and_version=$(echo $name|awk -F_ '{print $3}')
+            version="${python_and_version:6:-1}"
+            CONFIGS="${CONFIGS}{\"name\":\"${name}\",\"version\":\"${version}\",\"os\":\"macos\"}, "
+          done
+          echo "config=[${CONFIGS::-2}]" >> $GITHUB_OUTPUT
+
+      - name: List 'windows' configurations
+        id: win
+        run: |
+          CONFIGS=""
+          for CONFIG in .ci_support/win_*.yaml; do
+            name=${CONFIG:12:-5}
+            python_and_version=$(echo $name|awk -F_ '{print $3}')
+            version="${python_and_version:6:-1}"
+            CONFIGS="${CONFIGS}{\"name\":\"${name}\",\"version\":\"${version}\",\"os\":\"windows\"}, "
+          done
+          echo "config=[${CONFIGS::-2}]" >> $GITHUB_OUTPUT
+    outputs:
+      data: ${{ steps.recipe.outputs.meta }}
+      data_path: ${{ steps.recipe.outputs.meta_path }}
+      unix: ${{ steps.unix.outputs.config }}
+      win: ${{ steps.win.outputs.config }}
+
+  build_conda_unix:
+    needs: [conda_recipe]
+    strategy:
+      fail-fast: false
+      matrix:
+        config: ${{ fromJSON(needs.conda_recipe.outputs.unix) }}
+    name: Build ${{ matrix.config.name }}
+    runs-on: ${{ matrix.config.os }}-latest
+
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          repository: marcelotduarte/cx_freeze-feedstock
+
+      - uses: actions/checkout@v4
+        with:
+          ref: develop
+          repository: marcelotduarte/cx_Freeze
+          path: recipe/cx_Freeze
+
+      - name: Update recipe
+        working-directory: recipe
+        run: echo ${{ needs.conda_recipe.outputs.data_path }} | base64 -d>meta.yaml
+
+      - name: Update conda-forge.yml
+        run: |
+          sed -i.xx 's/conda_forge_output_validation\: true/conda_forge_output_validation: false/' conda-forge.yml
+
+      - run: cat recipe/meta.yaml
+
+      - name: Build the conda package
+        run: python build-locally.py ${{ matrix.config.name }}
+
+      - name: Move to build_artifacts
+        if: matrix.config.os == 'macos'
+        run: |
+          mkdir -p build_artifacts
+          mv miniforge3/conda-bld/* build_artifacts/
+
+      - run: ls -l build_artifacts
+
+      - name: Upload the conda artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: cx-freeze-conda-${{ matrix.config.name }}
+          path: |
+            ./build_artifacts/*/cx_freeze*.conda
+            ./build_artifacts/*/cx_freeze*.tar.bz2
+            !./build_artifacts/pkg_cache/*
+
+  build_conda_windows:
+    needs: [conda_recipe]
+    strategy:
+      fail-fast: false
+      matrix:
+        config: ${{ fromJSON(needs.conda_recipe.outputs.win) }}
+    name: Build ${{ matrix.config.name }}
+    defaults:
+      run:
+        shell: bash -l {0}
+    runs-on: ${{ matrix.config.os }}-latest
+
+    steps:
+      - uses: conda-incubator/setup-miniconda@v3
+        with:
+          activate-environment: freeze-${{ matrix.config.name }}
+          python-version: ${{ matrix.config.version }}
+          channels: conda-forge
+
+      - run: conda info
+
+      - run: conda install conda-build
+
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          repository: marcelotduarte/cx_freeze-feedstock
+
+      - name: Update recipe
+        working-directory: recipe
+        run: echo ${{ needs.conda_recipe.outputs.data }} | base64 -d>meta.yaml
+
+      - run: cat recipe/meta.yaml
+
+      - name: Build the conda package
+        run: |
+          mkdir -p build_artifacts
+          conda build recipe -m .ci_support/${{ matrix.config.name }}.yaml --output-folder build_artifacts
+
+      - run: ls -l build_artifacts
+
+      - name: Upload the conda artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: cx-freeze-conda-${{ matrix.config.name }}
+          path: |
+            ./build_artifacts/*/cx_freeze*.conda
+            ./build_artifacts/*/cx_freeze*.tar.bz2
+            !./build_artifacts/pkg_cache/*
+
+  build_conda_index:
+    needs:
+      # to build the index
+      - build_conda_unix
+      - build_conda_windows
+    strategy:
+      fail-fast: false
+    name: Conda index
+    defaults:
+      run:
+        shell: bash -l {0}
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: conda-incubator/setup-miniconda@v3
+        with:
+          activate-environment: freeze-index
+          python-version: "3.12"
+          channels: conda-forge
+
+      - name: Download all conda artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: build_artifacts
+          pattern: cx-freeze-conda-*
+          merge-multiple: true
+
+      - run: ls -l build_artifacts
+
+      - name: Install conda index
+        run: conda install -c conda-forge conda-index
+
+      - name: Run conda index
+        run: |
+          python -m conda_index --verbose -n packages/conda \
+            --subdir linux-64 \
+            --subdir osx-64 --subdir osx-arm64 \
+            --subdir win-64 \
+            build_artifacts
+
+      - run: ls -l build_artifacts
+
+      - name: Upload repository data to the conda artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: cx-freeze-conda
+          path: ./build_artifacts/*/*
+
+  packages:
+    name: Update packages repository
+    needs:
+      - build_conda_index
+      # to wait for all artifacts
+      - build_msys2
+      - build_wheel
+      #- build_wheel_cx_logging
+      #- build_wheel_lief
+    env:
+      LIEF_LINK: https://lief.s3-website.fr-par.scw.cloud/latest
+      PACKAGES: https://marcelotduarte.github.io/packages
+    permissions:
+      actions: read
+      contents: write
+      id-token: write
+      pages: write
+    runs-on: ubuntu-latest
+    steps:
+
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Preserve make_index script
+        run: mv make_index.py create_index.py
+
+      - name: Recreate branch gh-pages
+        run: |
+          git config user.name "Marcelo Duarte"
+          git config user.email marcelotduarte@users.noreply.github.com
+          git branch -D gh-pages || true
+          git push origin :gh-pages || true
+          git checkout --orphan gh-pages
+
+      - name: Download all lief artifacts
+        if: ${{ inputs.build_lief }}
+        uses: actions/download-artifact@v4
+        with:
+          path: lief-wheels
+          pattern: lief-*
+          merge-multiple: true
+
+      - name: Create index for LIEF
+        run: |
+          mkdir -p lief
+          cd lief
+          for f in $(
+            curl $LIEF_LINK/lief/ | grep -Eo "href=\"(.*win.*)\"" | cut -c"7-" | cut -d \" -f 1
+          ); do
+            touch `basename $f`
+          done
+          cd ..
+          # redirected files
+          python create_index.py lief --base LIEF
+          sed -i 's,${{ env.PACKAGES }},${{ env.LIEF_LINK }},g' lief/index.md
+          sed -i '/## /d' lief/index.md
+          rm -rf lief/*.whl
+          # local build
+          if ${{ inputs.build_lief }}; then
+            mv lief/index.md lief/dev.md
+            mv lief-wheels/*.whl lief/ || true
+            python create_index.py lief --base LIEF --mask "*.whl"
+            mv lief/index.md lief/local.md
+            # join
+            echo -e "`cat lief/local.md`\n`cat lief/dev.md`\n">lief/index.md
+            rm lief/local.md lief/dev.md
+          fi
+
+      - name: Download all cx-logging artifacts
+        if: ${{ inputs.build_cx_logging }}
+        uses: actions/download-artifact@v4
+        with:
+          path: cx-logging
+          pattern: cx-logging-*
+          merge-multiple: true
+
+      - name: Create index for cx-logging wheels
+        if: ${{ inputs.build_cx_logging }}
+        run: python create_index.py cx-logging --base cx_Logging
+
+      - name: Download all msys2 artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: msys2
+          pattern: cx-freeze-msys2-*
+          merge-multiple: true
+
+      - name: Create index for python-cx-freeze (msys2)
+        run: python create_index.py msys2 --base python-cx-freeze --mask "*.tar.zst"
+
+      - name: Download all conda artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: conda
+          name: cx-freeze-conda
+
+      - name: Create index for cx_freeze (conda)
+        run: python create_index.py conda --mask "cx_freeze*.conda" --mask "cx_freeze*.tar.bz2"
+
+      - name: Download all cx_Freeze artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: cx-freeze
+          pattern: cx-freeze-whl-*
+          merge-multiple: true
+
+      - name: Create index for cx_Freeze wheels
+        run: python create_index.py cx-freeze --base cx_Freeze
+
+      - name: Cleanup
+        run: rm -rf lief-wheels *.py *.md PKGBUILD
+
+      - name: Create packages template
+        run: |
+          # configuration
+          echo "theme: jekyll-theme-architect">_config.yml
+
+          # template
+          VERSION=$(ls cx-freeze | (read name; echo $name) | sed 's/-/ /g' | awk '{print $2}')
+          echo -e "# Development packages for cx_Freeze $VERSION\n">index.md
+          echo -e "Development wheels for [cx_Freeze](cx-freeze/index.md).\n">>index.md
+          echo -e "Development packages for MSYS2 [python-cx-freeze](msys2/index.md).\n">>index.md
+          echo -e "Development packages for conda-forge [cx_freeze](conda/index.md).\n">>index.md
+          if ${{ inputs.build_cx_logging }}; then
+            echo -e "# Packages for cx_Logging 3.2 \[Windows\]\[Python 3.13\]\n">>index.md
+            echo -e "Unofficial wheels for [cx_Logging](cx-logging/index.md).\n">>index.md
+          fi
+          echo -e "# Packages for LIEF \[Windows\]\[Python 3.8-3.13\]\n">>index.md
+          echo -e "Development wheels for [LIEF](lief/index.md).\n">>index.md
+
+      - name: Publish cx_Freeze packages
+        run: |
+          git add .
+          git commit -m "Publish cx_Freeze packages"
+          git push --set-upstream origin gh-pages
