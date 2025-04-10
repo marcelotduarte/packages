@@ -1,0 +1,41 @@
+name: Build wheel (cx_Logging)
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+jobs:
+  build_wheels:
+    name: Build wheels on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest]
+    defaults:
+      run:
+        shell: bash
+    steps:
+
+      - uses: actions/checkout@v4
+        with:
+          repository: marcelotduarte/cx_Logging
+
+      - uses: actions/setup-python@v5
+        with:
+          cache: 'pip'
+          python-version: '3.12'
+
+      - name: Build wheels
+        run: |
+          python -m pip install --upgrade cibuildwheel
+          cibuildwheel --output-dir wheelhouse
+        env:
+          CIBW_ENABLE: cpython-freethreading
+          CIBW_BUILD: cp313*
+
+      - name: Upload the artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: cx-logging-${{ matrix.os }}
+          path: wheelhouse
