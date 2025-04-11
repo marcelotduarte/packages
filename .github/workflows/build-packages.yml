@@ -293,24 +293,17 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          ref: gh-pages
 
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
-      - name: Recreate branch gh-pages
-        run: |
-          git config user.name "Marcelo Duarte"
-          git config user.email marcelotduarte@users.noreply.github.com
-          #git branch -D gh-pages || true
-          #git push origin :gh-pages || true
-          git checkout --orphan gh-pages || true
-          git checkout gh-pages
-
       - name: Preserve make_index script
         run: |
-          git checkout main make_index.py
-          mv make_index.py create_index.py
+          git checkout main
+          cp make_index.py create_index.py
+          git checkout gh-pages
 
       - name: Download all lief artifacts
         if: ${{ inputs.build_lief }}
@@ -410,6 +403,8 @@ jobs:
 
       - name: Publish cx_Freeze packages
         run: |
+          git config user.name "Marcelo Duarte"
+          git config user.email "12752334+marcelotduarte@users.noreply.github.com"
           git add .
           git commit -m "Publish cx_Freeze packages"
           git push --set-upstream origin gh-pages
