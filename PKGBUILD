@@ -17,6 +17,7 @@ msys2_references=(
 license=('spdx:PSF-2.0')
 depends=(
     "${MINGW_PACKAGE_PREFIX}-python"
+    "${MINGW_PACKAGE_PREFIX}-python-filelock"
     "${MINGW_PACKAGE_PREFIX}-python-packaging"
     "${MINGW_PACKAGE_PREFIX}-python-pip"
     "${MINGW_PACKAGE_PREFIX}-python-setuptools"
