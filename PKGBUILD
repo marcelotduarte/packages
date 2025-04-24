@@ -22,11 +22,13 @@ depends=(
   "${MINGW_PACKAGE_PREFIX}-python-pip"
   "${MINGW_PACKAGE_PREFIX}-python-setuptools"
   "${MINGW_PACKAGE_PREFIX}-python-cx-logging"
-  "${MINGW_PACKAGE_PREFIX}-python-cabarchive"
-  "${MINGW_PACKAGE_PREFIX}-python-striprtf"
 )
 if [ "${MINGW_ARCH}" != "mingw32" ]; then
-  depends+=("${MINGW_PACKAGE_PREFIX}-python-lief")
+  depends+=(
+    "${MINGW_PACKAGE_PREFIX}-python-lief"
+    "${MINGW_PACKAGE_PREFIX}-python-cabarchive"
+    "${MINGW_PACKAGE_PREFIX}-python-striprtf"
+  )
 fi
 makedepends=(
   "${MINGW_PACKAGE_PREFIX}-python-build"
@@ -64,6 +66,10 @@ prepare() {
   cd "${srcdir}"/${_name}-${pkgver}
   # ignore version check for setuptools
   sed -i 's/"setuptools>=.*"/"setuptools"/' pyproject.toml
+  if [ "${MINGW_ARCH}" == "mingw32" ]; then
+    sed -i 's/"cabarchive>=.*"/#"cabarchive"/' pyproject.toml
+    sed -i 's/"striprtf>=.*"/#"striprtf"/' pyproject.toml
+  fi
 
   rm -Rf "${srcdir}"/python-${_realname}-${MSYSTEM}
   cp -a "${srcdir}"/cx_Freeze-${pkgver} "${srcdir}"/python-${_realname}-${MSYSTEM}
@@ -82,7 +88,14 @@ build() {
 check() {
   cd python-${_realname}-${MSYSTEM}
   ${MINGW_PREFIX}/bin/pip install cx_Freeze -f dist --no-deps --no-index
-  ${MINGW_PREFIX}/bin/pytest -nauto --cov="cx_Freeze"
+
+  mkdir -p "${srcdir}/python-test"
+  cp pyproject.toml "${srcdir}/python-test/"
+  cp -a samples "${srcdir}/python-test/samples/"
+  cp -a tests "${srcdir}/python-test/tests/"
+
+  cd "${srcdir}/python-test"
+  ${MINGW_PREFIX}/bin/python -m pytest -nauto --cov="cx_Freeze"
 }
 
 package() {
