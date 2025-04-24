@@ -16,54 +16,62 @@ msys2_references=(
 )
 license=('spdx:PSF-2.0')
 depends=(
-    "${MINGW_PACKAGE_PREFIX}-python"
-    "${MINGW_PACKAGE_PREFIX}-python-filelock"
-    "${MINGW_PACKAGE_PREFIX}-python-packaging"
-    "${MINGW_PACKAGE_PREFIX}-python-pip"
-    "${MINGW_PACKAGE_PREFIX}-python-setuptools"
-    "${MINGW_PACKAGE_PREFIX}-python-cx-logging"
+  "${MINGW_PACKAGE_PREFIX}-python"
+  "${MINGW_PACKAGE_PREFIX}-python-filelock"
+  "${MINGW_PACKAGE_PREFIX}-python-packaging"
+  "${MINGW_PACKAGE_PREFIX}-python-pip"
+  "${MINGW_PACKAGE_PREFIX}-python-setuptools"
+  "${MINGW_PACKAGE_PREFIX}-python-cx-logging"
+  "${MINGW_PACKAGE_PREFIX}-python-cabarchive"
+  "${MINGW_PACKAGE_PREFIX}-python-striprtf"
 )
-if [ "${MINGW_ARCH}" != "mingw32" ] && [ "${CARCH}" != "aarch64" ]; then
-    depends+=("${MINGW_PACKAGE_PREFIX}-python-lief")
+if [ "${MINGW_ARCH}" != "mingw32" ]; then
+  depends+=("${MINGW_PACKAGE_PREFIX}-python-lief")
 fi
 makedepends=(
-    "${MINGW_PACKAGE_PREFIX}-python-build"
-    "${MINGW_PACKAGE_PREFIX}-python-installer"
-    "${MINGW_PACKAGE_PREFIX}-cc"
-    "${MINGW_PACKAGE_PREFIX}-tools"
+  "${MINGW_PACKAGE_PREFIX}-python-build"
+  "${MINGW_PACKAGE_PREFIX}-python-installer"
+  "${MINGW_PACKAGE_PREFIX}-cc"
+  "${MINGW_PACKAGE_PREFIX}-tools"
 )
 checkdepends=(
-    "${MINGW_PACKAGE_PREFIX}-python-pytest"
-    "${MINGW_PACKAGE_PREFIX}-python-pytest-cov"
-    "${MINGW_PACKAGE_PREFIX}-python-pytest-mock"
-    "${MINGW_PACKAGE_PREFIX}-python-pytest-timeout"
-    "${MINGW_PACKAGE_PREFIX}-python-pytest-xdist"
+  "${MINGW_PACKAGE_PREFIX}-python-pytest"
+  "${MINGW_PACKAGE_PREFIX}-python-pytest-cov"
+  "${MINGW_PACKAGE_PREFIX}-python-pytest-mock"
+  "${MINGW_PACKAGE_PREFIX}-python-pytest-timeout"
+  "${MINGW_PACKAGE_PREFIX}-python-pytest-xdist"
 )
 options=(!strip)
-source=()
-sha256sums=()
+if [ "$CI" == "true" ]; then
+  source=("file://$startdir/${_realname/-/_}-${pkgver}.tar.gz")
+  sha256sums=(SKIP)
+else
+  source=()
+  sha256sums=()
+fi
 
 prepare() {
-  echo "pwd: $(pwd)" 
-  echo "srcdir: ${srcdir}"
-  rm -Rf "${srcdir}"/python-${_realname}-${MSYSTEM}
-  mkdir -p "${srcdir}"/python-${_realname}-${MSYSTEM}
-  if [ -d ../cx_Freeze ]; then
-    cp -a ../cx_Freeze/* "${srcdir}"/python-${_realname}-${MSYSTEM}
-  else
-    cp -a ../../cx_Freeze/* "${srcdir}"/python-${_realname}-${MSYSTEM}
+  if ! [ "$CI" == "true" ]; then
+    # Local
+    cd ../../cx_Freeze
+    pkgver=$(grep "__version__ = " cx_Freeze/__init__.py | sed 's/-dev./.dev/' | awk -F\" '{print $2}')
+    ${MINGW_PREFIX}/bin/python -m build -s -x -n -o "$startdir"
+    cd "${srcdir}"
+    echo "Extract tar archive"
+    ${MINGW_PREFIX}/bin/bsdtar -x -v -f "$startdir/${_realname/-/_}-${pkgver}.tar.gz"
   fi
 
-  cd "${srcdir}"/python-${_realname}-${MSYSTEM}
+  cd "${srcdir}"/${_name}-${pkgver}
   # ignore version check for setuptools
   sed -i 's/"setuptools>=.*"/"setuptools"/' pyproject.toml
-  sed -i 's/"cabarchive>=.*"/#"cabarchive"/' pyproject.toml
-  sed -i 's/"striprtf>=.*"/#"striprtf"/' pyproject.toml
+
+  rm -Rf "${srcdir}"/python-${_realname}-${MSYSTEM}
+  cp -a "${srcdir}"/cx_Freeze-${pkgver} "${srcdir}"/python-${_realname}-${MSYSTEM}
 }
 
 pkgver() {
   cd python-${_realname}-${MSYSTEM}
-  grep "__version__ = " cx_Freeze/__init__.py | sed 's/-/./' | awk -F\" '{print $2}'
+  grep "__version__ = " cx_Freeze/__init__.py | sed 's/-dev./.dev/' | awk -F\" '{print $2}'
 }
 
 build() {
