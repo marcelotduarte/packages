@@ -45,8 +45,8 @@ jobs:
       - name: '⚙️ Set up uv'
         uses: astral-sh/setup-uv@v6
         with:
-          enable-cache: true
           cache-dependency-glob: "pyproject.toml"
+          enable-cache: true
 
       - name: '🚧 Build source distribution'
         run: uv build --sdist -o wheelhouse
@@ -64,18 +64,18 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - { sys: ucrt64,  env: ucrt-x86_64, icon: '🟨' }
-          #- { sys: clangarm64, env: clang-aarch64, icon: '🟧' }
-          - { sys: mingw64, env: x86_64, icon: '🟦' }
-          - { sys: mingw32, env: i686, icon: ⬛' }
-          - { sys: clang64, env: clang-x86_64, icon: '🟧' }
+          - { os: windows-latest, sys: ucrt64,  env: ucrt-x86_64, icon: '🟨' }
+          - { os: windows-11-arm, sys: clangarm64, env: clang-aarch64, icon: '🟧' }
+          - { os: windows-latest, sys: mingw64, env: x86_64, icon: '🟦' }
+          - { os: windows-latest, sys: mingw32, env: i686, icon: ⬛' }
+          - { os: windows-latest, sys: clang64, env: clang-x86_64, icon: '🟧' }
     name: Build [${{ matrix.sys }} ${{ matrix.env }}]
     defaults:
       run:
         shell: msys2 {0}
     env:
       MINGW_ARCH: ${{ matrix.sys }}
-    runs-on: windows-2025
+    runs-on: ${{ matrix.os }}
     steps:
 
       - name: '⚙️ git config'

@@ -11,7 +11,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-latest]
+        os: [windows-latest, windows-11-arm]
     defaults:
       run:
         shell: bash
@@ -32,7 +32,7 @@ jobs:
           cibuildwheel --output-dir wheelhouse
         env:
           CIBW_ENABLE: cpython-freethreading
-          CIBW_BUILD: cp313*
+          CIBW_BUILD: cp313t-win32 cp313t-win_amd64 cp3*-win_arm64
 
       - name: Upload the artifact
         uses: actions/upload-artifact@v4

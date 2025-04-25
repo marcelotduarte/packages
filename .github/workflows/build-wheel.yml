@@ -10,7 +10,7 @@ on:
         default: main
         required: true
         type: string
-      extra_linux_platforms:
+      extra_platforms:
         default: true
         required: false
         type: boolean
@@ -27,7 +27,7 @@ on:
         options:
           - develop
           - main
-      extra_linux_platforms:
+      extra_platforms:
         default: true
         required: false
         type: boolean
@@ -82,7 +82,7 @@ jobs:
                   "tag": "cp3{12,13}*-macosx_universal2",
               },
           ]
-          if "${{ inputs.extra_linux_platforms }}" == "true":
+          if "${{ inputs.extra_platforms }}" == "true":
               include += [
                 {
                     "os": "ubuntu",
@@ -92,21 +92,21 @@ jobs:
                 },
                 {
                     "os": "ubuntu",
-                    "os_version": "latest",
+                    "os_version": "24.04-arm",
                     "arch": "arm64",
                     "tag": "cp3*-manylinux_aarch64",
                 },
                 {
                     "os": "ubuntu",
-                    "os_version": "latest",
+                    "os_version": "24.04-arm",
                     "arch": "arm64",
                     "tag": "cp3*-musllinux_aarch64",
                 },
                 {
                     "os": "ubuntu",
-                    "os_version": "latest",
+                    "os_version": "22.04",
                     "arch": "ppc64le",
-                    "tag": "cp3*-manylinux_ppc64le",
+                    "tag": "cp3{10,11,12}-manylinux_ppc64le",
                 },
                 {
                     "os": "windows",
@@ -128,8 +128,7 @@ jobs:
       data: ${{ steps.includes.outputs.data }}
 
   build_wheel:
-    needs:
-      - matrix
+    needs: matrix
     strategy:
       fail-fast: false
       # macos-14 is arm64 (apple silicon), macos-13 is x86_64
@@ -153,13 +152,13 @@ jobs:
         with:
           python-version: '3.12'
 
-      - uses: astral-sh/setup-uv@v5
+      - uses: astral-sh/setup-uv@v6
         with:
-          enable-cache: true
           cache-dependency-glob: "pyproject.toml"
+          enable-cache: true
 
       - name: Set up QEMU
-        if: runner.os == 'Linux' && matrix.arch != 'x86_64'
+        if: runner.os == 'Linux' && matrix.arch != 'x86_64' && matrix.arch != 'arm64'
         uses: docker/setup-qemu-action@v3
         with:
           platforms: ${{ matrix.arch }}
