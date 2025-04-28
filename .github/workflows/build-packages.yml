@@ -306,6 +306,13 @@ jobs:
           cp make_index.py create_index.py
           git checkout gh-pages
 
+      - name: Remove old wheels
+        run: |
+          git rm -f cx-freeze/*
+          git rm -f cx-logging/*
+          git rm -f msys2/*
+          git rm -f conda/* -r
+
       - name: Download all lief artifacts
         if: ${{ inputs.build_lief }}
         uses: actions/download-artifact@v4
@@ -323,6 +330,7 @@ jobs:
           ); do
             touch `basename $f`
           done
+          rm -rf lief/*-cp38-*.whl
           cd ..
           # redirected files
           python create_index.py lief --base LIEF
@@ -396,10 +404,10 @@ jobs:
           echo -e "Development packages for MSYS2 [python-cx-freeze](msys2/index.md).\n">>index.md
           echo -e "Development packages for conda-forge [cx_freeze](conda/index.md).\n">>index.md
           if ${{ inputs.build_cx_logging }}; then
-            echo -e "# Packages for cx_Logging 3.2 \[Windows\]\[Python 3.13\]\n">>index.md
+            echo -e "# Packages for cx_Logging 3.2.1 \[Windows\]\[Python 3.13\]\n">>index.md
             echo -e "Unofficial wheels for [cx_Logging](cx-logging/index.md).\n">>index.md
           fi
-          echo -e "# Packages for LIEF \[Windows\]\[Python 3.8-3.13\]\n">>index.md
+          echo -e "# Packages for LIEF \[Windows\]\[Python 3.9-3.13\]\n">>index.md
           echo -e "Development wheels for [LIEF](lief/index.md).\n">>index.md
 
       - name: Publish cx_Freeze packages
