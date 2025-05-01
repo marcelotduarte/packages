@@ -26,6 +26,8 @@
 
 [cx_freeze-8.3.0.dev1745875460-cp311-cp311-win_amd64.whl](https://marcelotduarte.github.io/packages/cx-freeze/cx_freeze-8.3.0.dev1745875460-cp311-cp311-win_amd64.whl)
 
+[cx_freeze-8.3.0.dev1745875460-cp311-cp311-win_arm64.whl](https://marcelotduarte.github.io/packages/cx-freeze/cx_freeze-8.3.0.dev1745875460-cp311-cp311-win_arm64.whl)
+
 [cx_freeze-8.3.0.dev1745875460-cp312-cp312-macosx_10_13_universal2.whl](https://marcelotduarte.github.io/packages/cx-freeze/cx_freeze-8.3.0.dev1745875460-cp312-cp312-macosx_10_13_universal2.whl)
 
 [cx_freeze-8.3.0.dev1745875460-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl](https://marcelotduarte.github.io/packages/cx-freeze/cx_freeze-8.3.0.dev1745875460-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl)
@@ -42,6 +44,8 @@
 
 [cx_freeze-8.3.0.dev1745875460-cp312-cp312-win_amd64.whl](https://marcelotduarte.github.io/packages/cx-freeze/cx_freeze-8.3.0.dev1745875460-cp312-cp312-win_amd64.whl)
 
+[cx_freeze-8.3.0.dev1745875460-cp312-cp312-win_arm64.whl](https://marcelotduarte.github.io/packages/cx-freeze/cx_freeze-8.3.0.dev1745875460-cp312-cp312-win_arm64.whl)
+
 [cx_freeze-8.3.0.dev1745875460-cp313-cp313-macosx_10_13_universal2.whl](https://marcelotduarte.github.io/packages/cx-freeze/cx_freeze-8.3.0.dev1745875460-cp313-cp313-macosx_10_13_universal2.whl)
 
 [cx_freeze-8.3.0.dev1745875460-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl](https://marcelotduarte.github.io/packages/cx-freeze/cx_freeze-8.3.0.dev1745875460-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl)
@@ -51,6 +55,8 @@
 [cx_freeze-8.3.0.dev1745875460-cp313-cp313-win32.whl](https://marcelotduarte.github.io/packages/cx-freeze/cx_freeze-8.3.0.dev1745875460-cp313-cp313-win32.whl)
 
 [cx_freeze-8.3.0.dev1745875460-cp313-cp313-win_amd64.whl](https://marcelotduarte.github.io/packages/cx-freeze/cx_freeze-8.3.0.dev1745875460-cp313-cp313-win_amd64.whl)
+
+[cx_freeze-8.3.0.dev1745875460-cp313-cp313-win_arm64.whl](https://marcelotduarte.github.io/packages/cx-freeze/cx_freeze-8.3.0.dev1745875460-cp313-cp313-win_arm64.whl)
 
 [cx_freeze-8.3.0.dev1745875460-cp313-cp313t-macosx_10_13_universal2.whl](https://marcelotduarte.github.io/packages/cx-freeze/cx_freeze-8.3.0.dev1745875460-cp313-cp313t-macosx_10_13_universal2.whl)
 
