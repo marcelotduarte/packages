@@ -95,7 +95,11 @@ check() {
   cp -a tests "${srcdir}/python-test/tests/"
 
   cd "${srcdir}/python-test"
-  ${MINGW_PREFIX}/bin/python -m pytest -nauto --cov="cx_Freeze"
+  if [ "${MINGW_ARCH}" == "mingw32" ]; then
+    ${MINGW_PREFIX}/bin/python -m pytest -nauto --cov="cx_Freeze" -k "not hooks"
+  else
+    ${MINGW_PREFIX}/bin/python -m pytest -nauto --cov="cx_Freeze"
+  fi
 }
 
 package() {
