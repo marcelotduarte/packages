@@ -59,25 +59,25 @@ jobs:
           include = [
               {
                   "os": "ubuntu",
-                  "os_version": "latest",
+                  "os-version": "latest",
                   "arch": "x86_64",
                   "tag": "cp3*-manylinux_x86_64",
               },
               {
                   "os": "windows",
-                  "os_version": "latest",
+                  "os-version": "latest",
                   "arch": "x86_64",
                   "tag": "cp3*-win_amd64",
               },
               {
                   "os": "macos",
-                  "os_version": "13",
+                  "os-version": "13",
                   "arch": "universal2",
                   "tag": "cp3{9,10,11}-macosx_universal2",
               },
               {
                   "os": "macos",
-                  "os_version": "14",
+                  "os-version": "14",
                   "arch": "universal2",
                   "tag": "cp3{12,13}*-macosx_universal2",
               },
@@ -86,37 +86,37 @@ jobs:
               include += [
                 {
                     "os": "ubuntu",
-                    "os_version": "latest",
+                    "os-version": "latest",
                     "arch": "x86_64",
                     "tag": "cp3*-musllinux_x86_64",
                 },
                 {
                     "os": "ubuntu",
-                    "os_version": "24.04-arm",
+                    "os-version": "24.04-arm",
                     "arch": "arm64",
                     "tag": "cp3*-manylinux_aarch64",
                 },
                 {
                     "os": "ubuntu",
-                    "os_version": "24.04-arm",
+                    "os-version": "24.04-arm",
                     "arch": "arm64",
                     "tag": "cp3*-musllinux_aarch64",
                 },
                 {
                     "os": "ubuntu",
-                    "os_version": "22.04",
+                    "os-version": "22.04",
                     "arch": "ppc64le",
                     "tag": "cp3{10,11,12}-manylinux_ppc64le",
                 },
                 {
                     "os": "windows",
-                    "os_version": "11-arm",
+                    "os-version": "11-arm",
                     "arch": "arm64",
                     "tag": "cp3{11,12,13}-win_arm64",
                 },
                 {
                     "os": "windows",
-                    "os_version": "latest",
+                    "os-version": "latest",
                     "arch": "x86_64",
                     "tag": "cp3*-win32",
                 },
@@ -139,8 +139,8 @@ jobs:
       fail-fast: false
       # macos-14 is arm64 (apple silicon), macos-13 is x86_64
       matrix: ${{ fromJSON(needs.matrix.outputs.data) }}
-    name: Build [${{ matrix.os }}-${{ matrix.os_version }}-${{ matrix.arch }}](job-${{ strategy.job-index }})
-    runs-on: ${{ matrix.os }}-${{ matrix.os_version }}
+    name: Build [${{ matrix.os }}-${{ matrix.os-version }}-${{ matrix.arch }}](job-${{ strategy.job-index }})
+    runs-on: ${{ matrix.os }}-${{ matrix.os-version }}
     defaults:
       run:
         shell: bash
