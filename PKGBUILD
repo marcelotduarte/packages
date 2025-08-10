@@ -5,7 +5,7 @@ _name=cx_Freeze
 _realname=cx-freeze
 pkgbase=mingw-w64-python-${_realname}
 pkgname=("${MINGW_PACKAGE_PREFIX}-python-${_realname}")
-pkgver=8.2.0
+pkgver=8.4.0
 pkgrel=1
 pkgdesc="Creates standalone executables from Python scripts, with the same performance (mingw-w64)"
 arch=('any')
@@ -37,8 +37,8 @@ makedepends=(
   "${MINGW_PACKAGE_PREFIX}-tools"
 )
 checkdepends=(
+  "${MINGW_PACKAGE_PREFIX}-python-coverage"
   "${MINGW_PACKAGE_PREFIX}-python-pytest"
-  "${MINGW_PACKAGE_PREFIX}-python-pytest-cov"
   "${MINGW_PACKAGE_PREFIX}-python-pytest-mock"
   "${MINGW_PACKAGE_PREFIX}-python-pytest-timeout"
   "${MINGW_PACKAGE_PREFIX}-python-pytest-xdist"
@@ -82,12 +82,12 @@ pkgver() {
 
 build() {
   cd python-${_realname}-${MSYSTEM}
-  ${MINGW_PREFIX}/bin/python -m build --wheel --skip-dependency-check --no-isolation
+  python -m build --wheel --skip-dependency-check --no-isolation
 }
 
 check() {
   cd python-${_realname}-${MSYSTEM}
-  ${MINGW_PREFIX}/bin/pip install cx_Freeze -f dist --no-deps --no-index
+  pip install cx_Freeze -f dist --no-deps --no-index
 
   mkdir -p "${srcdir}/python-test"
   cp pyproject.toml "${srcdir}/python-test/"
@@ -96,10 +96,12 @@ check() {
 
   cd "${srcdir}/python-test"
   if [ "${MINGW_ARCH}" == "mingw32" ]; then
-    ${MINGW_PREFIX}/bin/python -m pytest -nauto --cov="cx_Freeze" -k "not hooks"
+    coverage run -m pytest --dist=loadfile -nauto -k "not hooks"
   else
-    ${MINGW_PREFIX}/bin/python -m pytest -nauto --cov="cx_Freeze"
+    coverage run
   fi
+  coverage combine
+  coverage report
 }
 
 package() {
