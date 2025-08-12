@@ -51,12 +51,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           ref: main
           repository: marcelotduarte/cx_freeze-feedstock
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           ref: develop
           repository: marcelotduarte/cx_Freeze
@@ -131,12 +131,12 @@ jobs:
         with:
           python-version: "3.12"
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           ref: main
           repository: marcelotduarte/cx_freeze-feedstock
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           ref: develop
           repository: marcelotduarte/cx_Freeze
@@ -195,7 +195,7 @@ jobs:
 
       - run: conda install conda-build
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           ref: main
           repository: marcelotduarte/cx_freeze-feedstock
@@ -290,7 +290,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
           ref: gh-pages

@@ -32,7 +32,7 @@ jobs:
     steps:
 
       - name: '🧰 Checkout'
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           ref: ${{ inputs.branch }}
           repository: marcelotduarte/cx_Freeze
@@ -83,7 +83,7 @@ jobs:
         shell: bash
 
       - name: '🧰 Checkout'
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: ' Download artifact: sdist'
         uses: actions/download-artifact@v5
