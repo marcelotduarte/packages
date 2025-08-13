@@ -1,41 +1,41 @@
 ## Links for conda
 
-[linux-64/cx_freeze-8.4.0.dev.1754339004-py310ha75aee5_0.conda](https://marcelotduarte.github.io/packages/conda/linux-64/cx_freeze-8.4.0.dev.1754339004-py310ha75aee5_0.conda)
+[linux-64/cx_freeze-8.5.0.dev.1755051448-py310h7c4b9e2_0.conda](https://marcelotduarte.github.io/packages/conda/linux-64/cx_freeze-8.5.0.dev.1755051448-py310h7c4b9e2_0.conda)
 
-[linux-64/cx_freeze-8.4.0.dev.1754339004-py311h9ecbd09_0.conda](https://marcelotduarte.github.io/packages/conda/linux-64/cx_freeze-8.4.0.dev.1754339004-py311h9ecbd09_0.conda)
+[linux-64/cx_freeze-8.5.0.dev.1755051448-py311h49ec1c0_0.conda](https://marcelotduarte.github.io/packages/conda/linux-64/cx_freeze-8.5.0.dev.1755051448-py311h49ec1c0_0.conda)
 
-[linux-64/cx_freeze-8.4.0.dev.1754339004-py312h66e93f0_0.conda](https://marcelotduarte.github.io/packages/conda/linux-64/cx_freeze-8.4.0.dev.1754339004-py312h66e93f0_0.conda)
+[linux-64/cx_freeze-8.5.0.dev.1755051448-py312h4c3975b_0.conda](https://marcelotduarte.github.io/packages/conda/linux-64/cx_freeze-8.5.0.dev.1755051448-py312h4c3975b_0.conda)
 
-[linux-64/cx_freeze-8.4.0.dev.1754339004-py313h536fd9c_0.conda](https://marcelotduarte.github.io/packages/conda/linux-64/cx_freeze-8.4.0.dev.1754339004-py313h536fd9c_0.conda)
+[linux-64/cx_freeze-8.5.0.dev.1755051448-py313h07c4f96_0.conda](https://marcelotduarte.github.io/packages/conda/linux-64/cx_freeze-8.5.0.dev.1755051448-py313h07c4f96_0.conda)
 
-[linux-64/cx_freeze-8.4.0.dev.1754339004-py39h8cd3c5a_0.conda](https://marcelotduarte.github.io/packages/conda/linux-64/cx_freeze-8.4.0.dev.1754339004-py39h8cd3c5a_0.conda)
+[linux-64/cx_freeze-8.5.0.dev.1755051448-py39hd399759_0.conda](https://marcelotduarte.github.io/packages/conda/linux-64/cx_freeze-8.5.0.dev.1755051448-py39hd399759_0.conda)
 
-[osx-64/cx_freeze-8.4.0.dev.1754339004-py310h69ff653_0.conda](https://marcelotduarte.github.io/packages/conda/osx-64/cx_freeze-8.4.0.dev.1754339004-py310h69ff653_0.conda)
+[osx-64/cx_freeze-8.5.0.dev.1755051448-py310h95e6f72_0.conda](https://marcelotduarte.github.io/packages/conda/osx-64/cx_freeze-8.5.0.dev.1755051448-py310h95e6f72_0.conda)
 
-[osx-64/cx_freeze-8.4.0.dev.1754339004-py311hff4f217_0.conda](https://marcelotduarte.github.io/packages/conda/osx-64/cx_freeze-8.4.0.dev.1754339004-py311hff4f217_0.conda)
+[osx-64/cx_freeze-8.5.0.dev.1755051448-py311h1bf5de0_0.conda](https://marcelotduarte.github.io/packages/conda/osx-64/cx_freeze-8.5.0.dev.1755051448-py311h1bf5de0_0.conda)
 
-[osx-64/cx_freeze-8.4.0.dev.1754339004-py312h323ca87_0.conda](https://marcelotduarte.github.io/packages/conda/osx-64/cx_freeze-8.4.0.dev.1754339004-py312h323ca87_0.conda)
+[osx-64/cx_freeze-8.5.0.dev.1755051448-py312hb63ad89_0.conda](https://marcelotduarte.github.io/packages/conda/osx-64/cx_freeze-8.5.0.dev.1755051448-py312hb63ad89_0.conda)
 
-[osx-64/cx_freeze-8.4.0.dev.1754339004-py313hb9c082b_0.conda](https://marcelotduarte.github.io/packages/conda/osx-64/cx_freeze-8.4.0.dev.1754339004-py313hb9c082b_0.conda)
+[osx-64/cx_freeze-8.5.0.dev.1755051448-py313h77bc0e8_0.conda](https://marcelotduarte.github.io/packages/conda/osx-64/cx_freeze-8.5.0.dev.1755051448-py313h77bc0e8_0.conda)
 
-[osx-64/cx_freeze-8.4.0.dev.1754339004-py39h42342cc_0.conda](https://marcelotduarte.github.io/packages/conda/osx-64/cx_freeze-8.4.0.dev.1754339004-py39h42342cc_0.conda)
+[osx-64/cx_freeze-8.5.0.dev.1755051448-py39h1496ab5_0.conda](https://marcelotduarte.github.io/packages/conda/osx-64/cx_freeze-8.5.0.dev.1755051448-py39h1496ab5_0.conda)
 
-[osx-arm64/cx_freeze-8.4.0.dev.1754339004-py310hbf89094_0.conda](https://marcelotduarte.github.io/packages/conda/osx-arm64/cx_freeze-8.4.0.dev.1754339004-py310hbf89094_0.conda)
+[osx-arm64/cx_freeze-8.5.0.dev.1755051448-py310h9d5bb1c_0.conda](https://marcelotduarte.github.io/packages/conda/osx-arm64/cx_freeze-8.5.0.dev.1755051448-py310h9d5bb1c_0.conda)
 
-[osx-arm64/cx_freeze-8.4.0.dev.1754339004-py311h4dd1780_0.conda](https://marcelotduarte.github.io/packages/conda/osx-arm64/cx_freeze-8.4.0.dev.1754339004-py311h4dd1780_0.conda)
+[osx-arm64/cx_freeze-8.5.0.dev.1755051448-py311h6613a89_0.conda](https://marcelotduarte.github.io/packages/conda/osx-arm64/cx_freeze-8.5.0.dev.1755051448-py311h6613a89_0.conda)
 
-[osx-arm64/cx_freeze-8.4.0.dev.1754339004-py312h8494c4a_0.conda](https://marcelotduarte.github.io/packages/conda/osx-arm64/cx_freeze-8.4.0.dev.1754339004-py312h8494c4a_0.conda)
+[osx-arm64/cx_freeze-8.5.0.dev.1755051448-py312hb559fc6_0.conda](https://marcelotduarte.github.io/packages/conda/osx-arm64/cx_freeze-8.5.0.dev.1755051448-py312hb559fc6_0.conda)
 
-[osx-arm64/cx_freeze-8.4.0.dev.1754339004-py313h13ca3d0_0.conda](https://marcelotduarte.github.io/packages/conda/osx-arm64/cx_freeze-8.4.0.dev.1754339004-py313h13ca3d0_0.conda)
+[osx-arm64/cx_freeze-8.5.0.dev.1755051448-py313hf8c52dd_0.conda](https://marcelotduarte.github.io/packages/conda/osx-arm64/cx_freeze-8.5.0.dev.1755051448-py313hf8c52dd_0.conda)
 
-[osx-arm64/cx_freeze-8.4.0.dev.1754339004-py39h054e408_0.conda](https://marcelotduarte.github.io/packages/conda/osx-arm64/cx_freeze-8.4.0.dev.1754339004-py39h054e408_0.conda)
+[osx-arm64/cx_freeze-8.5.0.dev.1755051448-py39h6693c76_0.conda](https://marcelotduarte.github.io/packages/conda/osx-arm64/cx_freeze-8.5.0.dev.1755051448-py39h6693c76_0.conda)
 
-[win-64/cx_freeze-8.4.0.dev.1754339004-py310ha8f682b_0.conda](https://marcelotduarte.github.io/packages/conda/win-64/cx_freeze-8.4.0.dev.1754339004-py310ha8f682b_0.conda)
+[win-64/cx_freeze-8.5.0.dev.1755051448-py310h29418f3_0.conda](https://marcelotduarte.github.io/packages/conda/win-64/cx_freeze-8.5.0.dev.1755051448-py310h29418f3_0.conda)
 
-[win-64/cx_freeze-8.4.0.dev.1754339004-py311he736701_0.conda](https://marcelotduarte.github.io/packages/conda/win-64/cx_freeze-8.4.0.dev.1754339004-py311he736701_0.conda)
+[win-64/cx_freeze-8.5.0.dev.1755051448-py311h3485c13_0.conda](https://marcelotduarte.github.io/packages/conda/win-64/cx_freeze-8.5.0.dev.1755051448-py311h3485c13_0.conda)
 
-[win-64/cx_freeze-8.4.0.dev.1754339004-py312h4389bb4_0.conda](https://marcelotduarte.github.io/packages/conda/win-64/cx_freeze-8.4.0.dev.1754339004-py312h4389bb4_0.conda)
+[win-64/cx_freeze-8.5.0.dev.1755051448-py312he06e257_0.conda](https://marcelotduarte.github.io/packages/conda/win-64/cx_freeze-8.5.0.dev.1755051448-py312he06e257_0.conda)
 
-[win-64/cx_freeze-8.4.0.dev.1754339004-py313ha7868ed_0.conda](https://marcelotduarte.github.io/packages/conda/win-64/cx_freeze-8.4.0.dev.1754339004-py313ha7868ed_0.conda)
+[win-64/cx_freeze-8.5.0.dev.1755051448-py313h5ea7bf4_0.conda](https://marcelotduarte.github.io/packages/conda/win-64/cx_freeze-8.5.0.dev.1755051448-py313h5ea7bf4_0.conda)
 
-[win-64/cx_freeze-8.4.0.dev.1754339004-py39ha55e580_0.conda](https://marcelotduarte.github.io/packages/conda/win-64/cx_freeze-8.4.0.dev.1754339004-py39ha55e580_0.conda)
+[win-64/cx_freeze-8.5.0.dev.1755051448-py39h0802e32_0.conda](https://marcelotduarte.github.io/packages/conda/win-64/cx_freeze-8.5.0.dev.1755051448-py39h0802e32_0.conda)
