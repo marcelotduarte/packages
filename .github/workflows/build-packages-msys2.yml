@@ -22,7 +22,7 @@ jobs:
   build_sdist:
     strategy:
       fail-fast: false
-    name: Build sdist
+    name: Build sdist cx-freeze
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -58,8 +58,49 @@ jobs:
           path: wheelhouse
           compression-level: 0  # no compression
 
+  build_sdist_freeze_core:
+    strategy:
+      fail-fast: false
+    name: Build sdist freeze-core
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    env:
+      UV_SYSTEM_PYTHON: true
+    steps:
+
+      - name: '🧰 Checkout'
+        uses: actions/checkout@v5
+        with:
+          #ref: ${{ inputs.branch }}
+          repository: marcelotduarte/freeze-core
+
+      - name: '⚙️ Set up Python'
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: '⚙️ Set up uv'
+        uses: astral-sh/setup-uv@v6
+        with:
+          cache-dependency-glob: "pyproject.toml"
+          enable-cache: true
+
+      - name: '🚧 Build source distribution'
+        run: uv build --sdist -o wheelhouse
+
+      - name: '📤 Upload artifact: sdist'
+        uses: actions/upload-artifact@v4
+        with:
+          name: freeze-core-sdist
+          path: wheelhouse
+          compression-level: 0  # no compression
+
   build_msys2:
-    needs: build_sdist
+    needs:
+      - build_sdist
+      - build_sdist_freeze_core
     strategy:
       fail-fast: false
       matrix:
@@ -85,11 +126,6 @@ jobs:
       - name: '🧰 Checkout'
         uses: actions/checkout@v5
 
-      - name: ' Download artifact: sdist'
-        uses: actions/download-artifact@v5
-        with:
-          name: cx-freeze-sdist
-
       - name: '${{ matrix.icon }} Setup MSYS2'
         uses: msys2/setup-msys2@v2
         with:
@@ -97,9 +133,26 @@ jobs:
           install: base-devel
           update: true
 
-      - name: '🚧 Build package'
+      - name: ' Download artifact: freeze-core-sdist'
+        uses: actions/download-artifact@v5
+        with:
+          name: freeze-core-sdist
+
+      - name: '🚧 Build package: freeze-core'
         run: |
-          PKGVER=$(ls *.tar.gz | awk -F- '{print $2}' | awk -F.tar.gz '{print $1}')
+          PKGVER=$(ls freeze_core-*.tar.gz | awk -F- '{print $2}' | awk -F.tar.gz '{print $1}')
+          sed -i "s/pkgver=.*/pkgver=$PKGVER/" PKGBUILD
+          makepkg-mingw -sCLf --noconfirm --noprogressbar -p PKGBUILD-core
+          #mv src/python-test-core/.coverage .coverage.${{ matrix.sys }}-core
+
+      - name: ' Download artifact: cx-freeze-sdist'
+        uses: actions/download-artifact@v5
+        with:
+          name: cx-freeze-sdist
+
+      - name: '🚧 Build package: cx-freeze'
+        run: |
+          PKGVER=$(ls cx_freeze-*.tar.gz | awk -F- '{print $2}' | awk -F.tar.gz '{print $1}')
           sed -i "s/pkgver=.*/pkgver=$PKGVER/" PKGBUILD
           makepkg-mingw -sCLf --noconfirm --noprogressbar
           mv src/python-test/.coverage .coverage.${{ matrix.sys }}

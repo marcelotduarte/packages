@@ -42,108 +42,9 @@ on:
           - windows
 
 jobs:
-  matrix:
-    name: Generate matrix of builds
-    runs-on: ubuntu-latest
-    steps:
-
-      - name: Set up Python
-        uses: actions/setup-python@v6
-        with:
-          python-version: '3.12'
-
-      - name: Extra includes
-        id: includes
-        run: |
-          import json, os
-          include = [
-              {
-                  "os": "ubuntu",
-                  "os-version": "latest",
-                  "arch": "x86_64",
-                  "tag": "cp3*-manylinux_x86_64",
-              },
-              {
-                  "os": "windows",
-                  "os-version": "latest",
-                  "arch": "x86_64",
-                  "tag": "cp3*-win_amd64",
-              },
-              {
-                  "os": "macos",
-                  "os-version": "13",
-                  "arch": "universal2",
-                  "tag": "cp3{9,10,11}-macosx_universal2",
-              },
-              {
-                  "os": "macos",
-                  "os-version": "14",
-                  "arch": "universal2",
-                  "tag": "cp3{12,13}*-macosx_universal2",
-              },
-          ]
-          if "${{ inputs.extra_platforms }}" == "true":
-              include += [
-                {
-                    "os": "ubuntu",
-                    "os-version": "latest",
-                    "arch": "x86_64",
-                    "tag": "cp3*-musllinux_x86_64",
-                },
-                {
-                    "os": "ubuntu",
-                    "os-version": "24.04-arm",
-                    "arch": "arm64",
-                    "tag": "cp3*-manylinux_aarch64",
-                },
-                {
-                    "os": "ubuntu",
-                    "os-version": "24.04-arm",
-                    "arch": "arm64",
-                    "tag": "cp3*-musllinux_aarch64",
-                },
-                {
-                    "os": "ubuntu",
-                    "os-version": "22.04",
-                    "arch": "ppc64le",
-                    "tag": "cp3{10,11,12}-manylinux_ppc64le",
-                },
-                {
-                    "os": "windows",
-                    "os-version": "11-arm",
-                    "arch": "arm64",
-                    "tag": "cp3{11,12,13}-win_arm64",
-                },
-                {
-                    "os": "windows",
-                    "os-version": "latest",
-                    "arch": "x86_64",
-                    "tag": "cp3*-win32",
-                },
-              ]
-          if "${{ inputs.os }}" != "all":
-              def func(item):
-                  return item["os"] == "${{ inputs.os }}"
-              include = list(filter(func, include))
-          with open(os.environ["GITHUB_OUTPUT"], "a+") as f:
-              print("data="+json.dumps({"include": include}), file=f)
-          print("data="+json.dumps({"include": include}))
-        shell: python
-
-    outputs:
-      data: ${{ steps.includes.outputs.data }}
-
   build_wheel:
-    needs: matrix
-    strategy:
-      fail-fast: false
-      # macos-14 is arm64 (apple silicon), macos-13 is x86_64
-      matrix: ${{ fromJSON(needs.matrix.outputs.data) }}
-    name: Build [${{ matrix.os }}-${{ matrix.os-version }}-${{ matrix.arch }}](job-${{ strategy.job-index }})
-    runs-on: ${{ matrix.os }}-${{ matrix.os-version }}
-    defaults:
-      run:
-        shell: bash
+    name: Build wheel
+    runs-on: ubuntu-latest
     env:
       UV_SYSTEM_PYTHON: true
     steps:
@@ -156,25 +57,19 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
-          python-version: '3.12'
+          python-version: "3.13"
 
       - uses: astral-sh/setup-uv@v6
         with:
           cache-dependency-glob: "pyproject.toml"
           enable-cache: true
 
-      - name: Set up QEMU
-        if: runner.os == 'Linux' && matrix.arch != 'x86_64' && matrix.arch != 'arm64'
-        uses: docker/setup-qemu-action@v3
-        with:
-          platforms: ${{ matrix.arch }}
-
       - name: Build sdist and wheels ${{ github.event_name }}
-        run: ./ci/build-wheel.sh "${{ matrix.tag }}"
+        run: ./ci/build-wheel.sh
 
       - name: Upload the artifact
         uses: actions/upload-artifact@v4
         with:
-          name: cx-freeze-whl-${{ matrix.os }}-job-${{ strategy.job-index }}
+          name: cx-freeze-wheel
           path: wheelhouse
           compression-level: 0  # no compression
