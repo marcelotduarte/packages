@@ -26,8 +26,6 @@ depends=(
 if [ "${MINGW_ARCH}" != "mingw32" ]; then
   depends+=(
     "${MINGW_PACKAGE_PREFIX}-python-lief"
-    "${MINGW_PACKAGE_PREFIX}-python-cabarchive"
-    "${MINGW_PACKAGE_PREFIX}-python-striprtf"
   )
 fi
 makedepends=(
@@ -66,10 +64,6 @@ prepare() {
   cd "${srcdir}"/${_name}-${pkgver}
   # ignore version check for setuptools
   sed -i 's/"setuptools>=.*"/"setuptools"/' pyproject.toml
-  if [ "${MINGW_ARCH}" == "mingw32" ]; then
-    sed -i 's/"cabarchive>=.*"/#"cabarchive"/' pyproject.toml
-    sed -i 's/"striprtf>=.*"/#"striprtf"/' pyproject.toml
-  fi
 
   rm -Rf "${srcdir}"/python-${_realname}-${MSYSTEM}
   cp -a "${srcdir}"/cx_Freeze-${pkgver} "${srcdir}"/python-${_realname}-${MSYSTEM}

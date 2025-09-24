@@ -44,6 +44,7 @@ checkdepends=(
 )
 options=(!strip)
 if [ "$CI" == "true" ]; then
+  pkgver=$(ls ${_realname/-/_}-*.tar.gz | awk -F- '{print $2}' | awk -F.tar.gz '{print $1}')
   source=("file://$startdir/${_realname/-/_}-${pkgver}.tar.gz")
   sha256sums=(SKIP)
 else
