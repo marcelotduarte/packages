@@ -11,6 +11,10 @@ on:
         default: false
         required: false
         type: boolean
+      build_freeze_core:
+        default: false
+        required: false
+        type: boolean
   workflow_dispatch:
     inputs:
       build_cx_logging:
@@ -21,17 +25,21 @@ on:
         default: false
         required: false
         type: boolean
+      build_freeze_core:
+        default: false
+        required: false
+        type: boolean
 
 jobs:
 
   build_wheel:
-    name: Build wheels
+    name: Build wheel for cx_Freeze
     uses: ./.github/workflows/build-wheel.yml
     with:
       branch: develop
 
   build_msys2:
-    name: Build msys2
+    name: Build msys2 packages
     uses: ./.github/workflows/build-packages-msys2.yml
     with:
       branch: develop
@@ -45,6 +53,11 @@ jobs:
     name: Build LIEF
     if: ${{ inputs.build_lief }}
     uses: ./.github/workflows/build-wheel-lief.yml
+
+  build_freeze_core:
+    name: Build wheels for freeze-core
+    if: ${{ inputs.build_freeze_core }}
+    uses: marcelotduarte/freeze-core/.github/workflows/build.yml@main
 
   conda_recipe:
     name: Generate conda-forge recipe
@@ -75,6 +88,7 @@ jobs:
           sed -i '/sha256:/c\  git_rev: develop' meta.yaml
           sed -i '/patches:/c\  #' meta.yaml
           sed -i '/\.patch/c\  #' meta.yaml
+          sed -i 's/- coverage run || true/- coverage run/' meta.yaml
           echo "meta=$(base64 --wrap=0 meta.yaml)" >> $GITHUB_OUTPUT
           cp meta.yaml meta_path.yaml
           sed -i '/git_url:/c\  path: ./cx_Freeze' meta_path.yaml
@@ -277,6 +291,7 @@ jobs:
       # to wait for all artifacts
       - build_msys2
       - build_wheel
+      #- build_freeze_core
       #- build_wheel_cx_logging
       #- build_wheel_lief
     env:
@@ -312,6 +327,7 @@ jobs:
           git rm -f cx-logging/* --ignore-unmatch
           git rm -f msys2/* --ignore-unmatch
           git rm -f conda/* -r --ignore-unmatch
+          git rm -f freeze-core/* --ignore-unmatch
 
       - name: Download all lief artifacts
         if: ${{ inputs.build_lief }}
@@ -360,6 +376,18 @@ jobs:
         if: ${{ inputs.build_cx_logging }}
         run: python create_index.py cx-logging --base cx_Logging
 
+      - name: Download all freeze-core artifacts
+        if: ${{ inputs.build_freeze_core }}
+        uses: actions/download-artifact@v5
+        with:
+          path: freeze-core
+          pattern: freeze-core-*
+          merge-multiple: true
+
+      - name: Create index for freeze-core wheels
+        if: ${{ inputs.build_freeze_core }}
+        run: python create_index.py freeze-core
+
       - name: Download all msys2 artifacts
         uses: actions/download-artifact@v5
         with:
@@ -383,14 +411,13 @@ jobs:
         uses: actions/download-artifact@v5
         with:
           path: cx-freeze
-          pattern: cx-freeze-whl-*
-          merge-multiple: true
+          pattern: cx-freeze-wheel
 
       - name: Create index for cx_Freeze wheels
         run: python create_index.py cx-freeze --base cx_Freeze
 
       - name: Cleanup
-        run: rm -rf lief-wheels *.py *.md PKGBUILD
+        run: rm -rf lief-wheels *.py *.md PKGBUILD*
 
       - name: Create packages template
         run: |
@@ -401,6 +428,9 @@ jobs:
           VERSION=$(ls cx-freeze | (read name; echo $name) | sed 's/-/ /g' | awk '{print $2}')
           echo -e "# Development packages for cx_Freeze $VERSION\n">index.md
           echo -e "Development wheels for [cx_Freeze](cx-freeze/index.md).\n">>index.md
+          if ${{ inputs.build_freeze_core }}; then
+            echo -e "Development wheels for [freeze-core](freeze-core/index.md).\n">>index.md
+          fi
           echo -e "Development packages for MSYS2 [python-cx-freeze](msys2/index.md).\n">>index.md
           echo -e "Development packages for conda-forge [cx_freeze](conda/index.md).\n">>index.md
           if ${{ inputs.build_cx_logging }}; then
