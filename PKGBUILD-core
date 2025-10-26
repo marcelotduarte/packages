@@ -4,7 +4,7 @@
 _realname=freeze-core
 pkgbase=mingw-w64-python-${_realname}
 pkgname=("${MINGW_PACKAGE_PREFIX}-python-${_realname}")
-pkgver=0.1.1
+pkgver=0.3.0
 pkgrel=1
 pkgdesc="Core dependency for cx_Freeze (mingw-w64)"
 arch=('any')
@@ -13,34 +13,29 @@ url="https://github.com/marcelotduarte/freeze-core/"
 msys2_references=(
   'pypi: freeze-core'
 )
-license=('spdx:PSF-2.0')
+license=('spdx:MIT')
 depends=(
   "${MINGW_PACKAGE_PREFIX}-python"
   "${MINGW_PACKAGE_PREFIX}-python-filelock"
-  "${MINGW_PACKAGE_PREFIX}-python-packaging"
-  "${MINGW_PACKAGE_PREFIX}-python-pip"
-  "${MINGW_PACKAGE_PREFIX}-python-setuptools"
-  "${MINGW_PACKAGE_PREFIX}-python-cx-logging"
 )
 if [ "${MINGW_ARCH}" != "mingw32" ]; then
   depends+=(
-    "${MINGW_PACKAGE_PREFIX}-python-lief"
     "${MINGW_PACKAGE_PREFIX}-python-cabarchive"
     "${MINGW_PACKAGE_PREFIX}-python-striprtf"
   )
 fi
 makedepends=(
-  "${MINGW_PACKAGE_PREFIX}-python-build"
-  "${MINGW_PACKAGE_PREFIX}-python-installer"
   "${MINGW_PACKAGE_PREFIX}-cc"
   "${MINGW_PACKAGE_PREFIX}-tools"
+  "${MINGW_PACKAGE_PREFIX}-python-build"
+  "${MINGW_PACKAGE_PREFIX}-python-installer"
+  "${MINGW_PACKAGE_PREFIX}-python-setuptools"
+  "${MINGW_PACKAGE_PREFIX}-python-cx-logging"
 )
 checkdepends=(
+  "${MINGW_PACKAGE_PREFIX}-python-pip"
   "${MINGW_PACKAGE_PREFIX}-python-coverage"
   "${MINGW_PACKAGE_PREFIX}-python-pytest"
-  "${MINGW_PACKAGE_PREFIX}-python-pytest-mock"
-  "${MINGW_PACKAGE_PREFIX}-python-pytest-timeout"
-  "${MINGW_PACKAGE_PREFIX}-python-pytest-xdist"
 )
 options=(!strip)
 if [ "$CI" == "true" ]; then
@@ -95,7 +90,7 @@ check() {
 
   cd "${srcdir}/python-test-core"
   if [ "${MINGW_ARCH}" == "mingw32" ]; then
-    coverage run -m pytest --dist=loadfile -nauto -k "not hooks"
+    coverage run -m pytest -k "not hooks"
   else
     coverage run
   fi

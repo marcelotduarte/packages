@@ -5,7 +5,7 @@ _name=cx_Freeze
 _realname=cx-freeze
 pkgbase=mingw-w64-python-${_realname}
 pkgname=("${MINGW_PACKAGE_PREFIX}-python-${_realname}")
-pkgver=8.4.0
+pkgver=8.5.0
 pkgrel=1
 pkgdesc="Creates standalone executables from Python scripts, with the same performance (mingw-w64)"
 arch=('any')
@@ -17,11 +17,8 @@ msys2_references=(
 license=('spdx:PSF-2.0')
 depends=(
   "${MINGW_PACKAGE_PREFIX}-python"
-  "${MINGW_PACKAGE_PREFIX}-python-filelock"
   "${MINGW_PACKAGE_PREFIX}-python-packaging"
-  "${MINGW_PACKAGE_PREFIX}-python-pip"
   "${MINGW_PACKAGE_PREFIX}-python-setuptools"
-  "${MINGW_PACKAGE_PREFIX}-python-cx-logging"
 )
 if [ "${MINGW_ARCH}" != "mingw32" ]; then
   depends+=(
@@ -31,10 +28,9 @@ fi
 makedepends=(
   "${MINGW_PACKAGE_PREFIX}-python-build"
   "${MINGW_PACKAGE_PREFIX}-python-installer"
-  "${MINGW_PACKAGE_PREFIX}-cc"
-  "${MINGW_PACKAGE_PREFIX}-tools"
 )
 checkdepends=(
+  "${MINGW_PACKAGE_PREFIX}-python-pip"
   "${MINGW_PACKAGE_PREFIX}-python-coverage"
   "${MINGW_PACKAGE_PREFIX}-python-pytest"
   "${MINGW_PACKAGE_PREFIX}-python-pytest-mock"

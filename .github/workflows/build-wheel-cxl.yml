@@ -23,8 +23,8 @@ jobs:
 
       - uses: actions/setup-python@v6
         with:
-          cache: 'pip'
-          python-version: '3.12'
+          cache: "pip"
+          python-version: "3.13"
 
       - name: Build wheels
         run: |
@@ -32,7 +32,7 @@ jobs:
           cibuildwheel --output-dir wheelhouse
         env:
           CIBW_ENABLE: cpython-freethreading
-          CIBW_BUILD: cp313t-win32 cp313t-win_amd64 cp3{11,12,13}*-win_arm64
+          CIBW_BUILD: cp3{13t,14,14t}-win* cp3{11,12,13}-win_arm64
 
       - name: Upload the artifact
         uses: actions/upload-artifact@v4
