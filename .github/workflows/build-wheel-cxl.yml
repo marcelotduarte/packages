@@ -35,7 +35,7 @@ jobs:
           CIBW_BUILD: cp3{13t,14,14t}-win* cp3{11,12,13}-win_arm64
 
       - name: Upload the artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: cx-logging-${{ matrix.os }}
           path: wheelhouse
