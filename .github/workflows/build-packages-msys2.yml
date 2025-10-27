@@ -52,7 +52,7 @@ jobs:
         run: uv build --sdist -o wheelhouse
 
       - name: '📤 Upload artifact: sdist'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: cx-freeze-sdist
           path: wheelhouse
@@ -91,7 +91,7 @@ jobs:
         run: uv build --sdist -o wheelhouse
 
       - name: '📤 Upload artifact: sdist'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: freeze-core-sdist
           path: wheelhouse
@@ -158,7 +158,7 @@ jobs:
           mv src/python-test/.coverage .coverage.${{ matrix.sys }}
 
       - name: '📤 Upload artifact: package'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: cx-freeze-msys2-${{ matrix.sys }}
           path: |
