@@ -257,7 +257,7 @@ jobs:
           channels: conda-forge
 
       - name: Download all conda artifacts
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           path: build_artifacts
           pattern: cx-freeze-conda-*
@@ -331,7 +331,7 @@ jobs:
 
       - name: Download all lief artifacts
         if: ${{ inputs.build_lief }}
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           path: lief-wheels
           pattern: lief-*
@@ -366,7 +366,7 @@ jobs:
 
       - name: Download all cx-logging artifacts
         if: ${{ inputs.build_cx_logging }}
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           path: cx-logging
           pattern: cx-logging-*
@@ -378,7 +378,7 @@ jobs:
 
       - name: Download all freeze-core artifacts
         if: ${{ inputs.build_freeze_core }}
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           path: freeze-core
           pattern: freeze-core-*
@@ -389,7 +389,7 @@ jobs:
         run: python create_index.py freeze-core
 
       - name: Download all msys2 artifacts
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           path: msys2
           pattern: cx-freeze-msys2-*
@@ -399,7 +399,7 @@ jobs:
         run: python create_index.py msys2 --base python-cx-freeze --mask "*.tar.zst"
 
       - name: Download all conda artifacts
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           path: conda
           name: cx-freeze-conda
@@ -408,7 +408,7 @@ jobs:
         run: python create_index.py conda --mask "cx_freeze*.conda" --mask "cx_freeze*.tar.bz2"
 
       - name: Download all cx_Freeze artifacts
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           path: cx-freeze
           pattern: cx-freeze-wheel

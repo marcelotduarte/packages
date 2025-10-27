@@ -134,7 +134,7 @@ jobs:
           update: true
 
       - name: ' Download artifact: freeze-core-sdist'
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           name: freeze-core-sdist
 
@@ -146,7 +146,7 @@ jobs:
           #mv src/python-test-core/.coverage .coverage.${{ matrix.sys }}-core
 
       - name: ' Download artifact: cx-freeze-sdist'
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           name: cx-freeze-sdist
 
