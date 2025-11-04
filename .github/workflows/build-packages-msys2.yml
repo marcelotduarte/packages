@@ -141,9 +141,8 @@ jobs:
       - name: '🚧 Build package: freeze-core'
         run: |
           PKGVER=$(ls freeze_core-*.tar.gz | awk -F- '{print $2}' | awk -F.tar.gz '{print $1}')
-          sed -i "s/pkgver=.*/pkgver=$PKGVER/" PKGBUILD
+          sed -i "s/pkgver=.*/pkgver=$PKGVER/" PKGBUILD-core
           makepkg-mingw -sCLf --noconfirm --noprogressbar -p PKGBUILD-core
-          #mv src/python-test-core/.coverage .coverage.${{ matrix.sys }}-core
 
       - name: ' Download artifact: cx-freeze-sdist'
         uses: actions/download-artifact@v6
@@ -154,8 +153,13 @@ jobs:
         run: |
           PKGVER=$(ls cx_freeze-*.tar.gz | awk -F- '{print $2}' | awk -F.tar.gz '{print $1}')
           sed -i "s/pkgver=.*/pkgver=$PKGVER/" PKGBUILD
-          makepkg-mingw -sCLf --noconfirm --noprogressbar
-          mv src/python-test/.coverage .coverage.${{ matrix.sys }}
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            makepkg-mingw -sCLf --noconfirm --noprogressbar
+            mv src/python-test/.coverage .coverage.${{ matrix.sys }}
+          else
+            # do not run check() in workflow_call to speed up the build
+            makepkg-mingw -sCLf --noconfirm --noprogressbar --nocheck
+          fi
 
       - name: '📤 Upload artifact: package'
         uses: actions/upload-artifact@v5
@@ -164,5 +168,11 @@ jobs:
           path: |
             mingw-w64-*.zst
             mingw-w64-*.zst.sig
-            .coverage.*
+
+      - name: '📤 Upload artifact: coverage'
+        if: github.event_name == 'workflow_dispatch'
+        uses: actions/upload-artifact@v5
+        with:
+          name: cx-freeze-msys2-${{ matrix.sys }}-coverage
+          path: .coverage.*
           include-hidden-files: true
