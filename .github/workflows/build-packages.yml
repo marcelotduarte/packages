@@ -66,7 +66,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
         with:
-          ref: main
+          ref: v850dev
           repository: marcelotduarte/cx_freeze-feedstock
 
       - uses: actions/checkout@v5
@@ -84,15 +84,12 @@ jobs:
           popd
           sed -i "/set version/c\{% set version = \"$VERSION\" %}" meta.yaml
           sed -i '/number:/c\  number: 0' meta.yaml
-          sed -i '/url:/c\  git_url: https://github.com/marcelotduarte/cx_Freeze.git' meta.yaml
-          sed -i '/sha256:/c\  git_rev: develop' meta.yaml
           sed -i '/patches:/c\  #' meta.yaml
           sed -i '/\.patch/c\  #' meta.yaml
-          sed -i 's/- coverage run || true/- coverage run/' meta.yaml
           echo "meta=$(base64 --wrap=0 meta.yaml)" >> $GITHUB_OUTPUT
           cp meta.yaml meta_path.yaml
-          sed -i '/git_url:/c\  path: ./cx_Freeze' meta_path.yaml
-          sed -i '/git_rev:/c\  #' meta_path.yaml
+          sed -i '/git_url:/c\  - path: ./cx_Freeze' meta_path.yaml
+          sed -i '/git_rev:/c\    #' meta_path.yaml
           echo "meta_path=$(base64 --wrap=0 meta_path.yaml)" >> $GITHUB_OUTPUT
           git diff
 
@@ -147,7 +144,7 @@ jobs:
 
       - uses: actions/checkout@v5
         with:
-          ref: main
+          ref: v850dev
           repository: marcelotduarte/cx_freeze-feedstock
 
       - uses: actions/checkout@v5
@@ -211,7 +208,7 @@ jobs:
 
       - uses: actions/checkout@v5
         with:
-          ref: main
+          ref: v850dev
           repository: marcelotduarte/cx_freeze-feedstock
 
       - name: Update recipe
