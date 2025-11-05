@@ -19,6 +19,7 @@ jobs:
 
       - uses: actions/checkout@v5
         with:
+          ref: develop
           repository: marcelotduarte/cx_Logging
 
       - uses: actions/setup-python@v6
@@ -27,12 +28,7 @@ jobs:
           python-version: "3.13"
 
       - name: Build wheels
-        run: |
-          python -m pip install --upgrade cibuildwheel
-          cibuildwheel --output-dir wheelhouse
-        env:
-          CIBW_ENABLE: cpython-freethreading
-          CIBW_BUILD: cp3{13t,14,14t}-win* cp3{11,12,13}-win_arm64
+        run: python -m pip install --upgrade cibuildwheel && cibuildwheel
 
       - name: Upload the artifact
         uses: actions/upload-artifact@v5
