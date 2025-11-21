@@ -28,7 +28,7 @@ jobs:
       UV_SYSTEM_PYTHON: true
     steps:
 
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         with:
           ref: ${{ inputs.branch }}
           repository: marcelotduarte/cx_Freeze

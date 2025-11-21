@@ -20,7 +20,7 @@ jobs:
     env:
       SCCACHE_CACHE_SIZE: 2G
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
           repository: lief-project/LIEF
@@ -99,7 +99,7 @@ jobs:
     env:
       SCCACHE_CACHE_SIZE: 2G
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
           repository: lief-project/LIEF
