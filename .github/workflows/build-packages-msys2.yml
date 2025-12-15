@@ -134,7 +134,7 @@ jobs:
           update: true
 
       - name: ' Download artifact: freeze-core-sdist'
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v7
         with:
           name: freeze-core-sdist
 
@@ -145,7 +145,7 @@ jobs:
           makepkg-mingw -sCLf --noconfirm --noprogressbar -p PKGBUILD-core
 
       - name: ' Download artifact: cx-freeze-sdist'
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v7
         with:
           name: cx-freeze-sdist
 
