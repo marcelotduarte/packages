@@ -52,7 +52,7 @@ jobs:
         run: uv build --sdist -o wheelhouse
 
       - name: '📤 Upload artifact: sdist'
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: cx-freeze-sdist
           path: wheelhouse
@@ -91,7 +91,7 @@ jobs:
         run: uv build --sdist -o wheelhouse
 
       - name: '📤 Upload artifact: sdist'
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: freeze-core-sdist
           path: wheelhouse
@@ -162,7 +162,7 @@ jobs:
           fi
 
       - name: '📤 Upload artifact: package'
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: cx-freeze-msys2-${{ matrix.sys }}
           path: |
@@ -171,7 +171,7 @@ jobs:
 
       - name: '📤 Upload artifact: coverage'
         if: github.event_name == 'workflow_dispatch'
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: cx-freeze-msys2-${{ matrix.sys }}-coverage
           path: .coverage.*
