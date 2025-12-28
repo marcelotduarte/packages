@@ -1,10 +1,10 @@
-# Maintainer: Marcelo Duarte https://github.com/marcelotduarte
-# makepkg-mingw -sCLf
+# Maintainer: Marcelo Duarte @marcelotduarte
+# makepkg-mingw -sCLf -p PKGBUILD-core
 
 _realname=freeze-core
 pkgbase=mingw-w64-python-${_realname}
 pkgname=("${MINGW_PACKAGE_PREFIX}-python-${_realname}")
-pkgver=0.3.0
+pkgver=0.4.2
 pkgrel=1
 pkgdesc="Core dependency for cx_Freeze (mingw-w64)"
 arch=('any')
@@ -15,6 +15,7 @@ msys2_references=(
 )
 license=('spdx:MIT')
 depends=(
+  "${MINGW_PACKAGE_PREFIX}-ca-certificates"
   "${MINGW_PACKAGE_PREFIX}-python"
   "${MINGW_PACKAGE_PREFIX}-python-filelock"
 )
@@ -39,7 +40,7 @@ checkdepends=(
 )
 options=(!strip)
 if [ "$CI" == "true" ]; then
-  pkgver=$(ls ${_realname/-/_}-*.tar.gz | awk -F- '{print $2}' | awk -F.tar.gz '{print $1}')
+  pkgver=$(find ${_realname/-/_}-*.tar.gz | awk -F- '{print $2}' | awk -F.tar.gz '{print $1}')
   source=("file://$startdir/${_realname/-/_}-${pkgver}.tar.gz")
   sha256sums=(SKIP)
 else
@@ -52,13 +53,13 @@ prepare() {
     # Local
     cd ../../${_realname}
     pkgver=$(grep "__version__ = " src/${_realname/-/_}/__init__.py | sed 's/-dev./.dev/' | awk -F\" '{print $2}')
-    ${MINGW_PREFIX}/bin/python -m build -s -x -n -o "$startdir"
+    python -m build -s -x -n -o "$startdir"
     cd "${srcdir}"
     echo "Extract tar archive"
-    ${MINGW_PREFIX}/bin/bsdtar -x -v -f "$startdir/${_realname/-/_}-${pkgver}.tar.gz"
+    bsdtar -x -v -f "$startdir/${_realname/-/_}-${pkgver}.tar.gz"
   fi
 
-  cd "${srcdir}"/${_realname/-/_}-${pkgver}
+  cd "${srcdir}/${_realname/-/_}-${pkgver}"
   # ignore version check for setuptools
   sed -i 's/"setuptools>=.*"/"setuptools"/' pyproject.toml
   if [ "${MINGW_ARCH}" == "mingw32" ]; then
@@ -66,22 +67,22 @@ prepare() {
     sed -i 's/"striprtf>=.*"/#"striprtf"/' pyproject.toml
   fi
 
-  rm -Rf "${srcdir}"/python-${_realname}-${MSYSTEM}
-  cp -a "${srcdir}"/${_realname/-/_}-${pkgver} "${srcdir}"/python-${_realname}-${MSYSTEM}
+  rm -Rf "${srcdir}/python-${_realname}-${MSYSTEM}"
+  cp -a "${srcdir}/${_realname/-/_}-${pkgver}" "${srcdir}/python-${_realname}-${MSYSTEM}"
 }
 
 pkgver() {
-  cd python-${_realname}-${MSYSTEM}
+  cd "python-${_realname}-${MSYSTEM}"
   grep "__version__ = " src/${_realname/-/_}/__init__.py | sed 's/-dev./.dev/' | awk -F\" '{print $2}'
 }
 
 build() {
-  cd python-${_realname}-${MSYSTEM}
+  cd "python-${_realname}-${MSYSTEM}"
   python -m build --wheel --skip-dependency-check --no-isolation
 }
 
 check() {
-  cd python-${_realname}-${MSYSTEM}
+  cd "python-${_realname}-${MSYSTEM}"
   pip install ${_realname} -f dist --no-deps --no-index
 
   mkdir -p "${srcdir}/python-test-core"
@@ -96,12 +97,12 @@ check() {
   fi
   coverage combine
   coverage report
+  pip uninstall ${_realname} -y
 }
 
 package() {
-  cd python-${_realname}-${MSYSTEM}
+  cd "python-${_realname}-${MSYSTEM}"
   MSYS2_ARG_CONV_EXCL="--prefix=" \
-    ${MINGW_PREFIX}/bin/python -m installer --prefix=${MINGW_PREFIX} \
-    --destdir="${pkgdir}" dist/*.whl
-  install -Dm644 LICENSE "${pkgdir}${MINGW_PREFIX}/share/licenses/python-${_realname}/LICENSE.md"
+    python -m installer --prefix="${MINGW_PREFIX}" --destdir="${pkgdir}" dist/*.whl
+  install -Dm644 LICENSE "${pkgdir}${MINGW_PREFIX}/share/licenses/python-${_realname}/LICENSE"
 }
