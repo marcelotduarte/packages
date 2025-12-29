@@ -1,4 +1,4 @@
-# Development packages for cx_Freeze 8.6.0.dev1766561649
+# Development packages for cx_Freeze 8.6.0.dev1766995680
 
 Development wheels for [cx_Freeze](cx-freeze/index.md).
 
