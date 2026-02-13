@@ -4,7 +4,7 @@
 _realname=freeze-core
 pkgbase=mingw-w64-python-${_realname}
 pkgname=("${MINGW_PACKAGE_PREFIX}-python-${_realname}")
-pkgver=0.4.2
+pkgver=0.6.0
 pkgrel=1
 pkgdesc="Core dependency for cx_Freeze (mingw-w64)"
 arch=('any')
@@ -52,7 +52,7 @@ prepare() {
   if ! [ "$CI" == "true" ]; then
     # Local
     cd ../../${_realname}
-    pkgver=$(grep "__version__ = " src/${_realname/-/_}/__init__.py | sed 's/-dev./.dev/' | awk -F\" '{print $2}')
+    pkgver=$(grep -m1 "version = " pyproject.toml | awk -F\" '{print $2}')
     python -m build -s -x -n -o "$startdir"
     cd "${srcdir}"
     echo "Extract tar archive"
@@ -73,7 +73,7 @@ prepare() {
 
 pkgver() {
   cd "python-${_realname}-${MSYSTEM}"
-  grep "__version__ = " src/${_realname/-/_}/__init__.py | sed 's/-dev./.dev/' | awk -F\" '{print $2}'
+  grep -m1 "version = " pyproject.toml | awk -F\" '{print $2}'
 }
 
 build() {

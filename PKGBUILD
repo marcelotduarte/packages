@@ -5,7 +5,7 @@ _name=cx_Freeze
 _realname=cx-freeze
 pkgbase=mingw-w64-python-${_realname}
 pkgname=("${MINGW_PACKAGE_PREFIX}-python-${_realname}")
-pkgver=8.5.1
+pkgver=8.6.0
 pkgrel=1
 pkgdesc="Creates standalone executables from Python scripts, with the same performance (mingw-w64)"
 arch=('any')
@@ -20,6 +20,7 @@ depends=(
   "${MINGW_PACKAGE_PREFIX}-python-packaging"
   "${MINGW_PACKAGE_PREFIX}-python-setuptools"
   "${MINGW_PACKAGE_PREFIX}-python-freeze-core"
+  "${MINGW_PACKAGE_PREFIX}-python-msilib"
 )
 if [ "${MINGW_ARCH}" != "mingw32" ]; then
   depends+=(
