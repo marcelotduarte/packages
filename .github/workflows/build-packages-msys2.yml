@@ -97,10 +97,50 @@ jobs:
           path: wheelhouse
           compression-level: 0  # no compression
 
+  build_sdist_msilib:
+    strategy:
+      fail-fast: false
+    name: Build sdist python-msilib
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    env:
+      UV_SYSTEM_PYTHON: true
+    steps:
+
+      - name: '🧰 Checkout'
+        uses: actions/checkout@v6
+        with:
+          #ref: ${{ inputs.branch }}
+          repository: marcelotduarte/python-msilib
+
+      - name: '⚙️ Set up Python'
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: '⚙️ Set up uv'
+        uses: astral-sh/setup-uv@v7
+        with:
+          cache-dependency-glob: "pyproject.toml"
+          enable-cache: true
+
+      - name: '🚧 Build source distribution'
+        run: uv build --sdist -o wheelhouse
+
+      - name: '📤 Upload artifact: sdist'
+        uses: actions/upload-artifact@v6
+        with:
+          name: python-msilib-sdist
+          path: wheelhouse
+          compression-level: 0  # no compression
+
   build_msys2:
     needs:
       - build_sdist
       - build_sdist_freeze_core
+      - build_sdist_msilib
     strategy:
       fail-fast: false
       matrix:
@@ -146,6 +186,20 @@ jobs:
           sed -i "s/pkgrel=.*/pkgrel=$PKGREL/" PKGBUILD-core
           makepkg-mingw -sCLf --noconfirm --noprogressbar -p PKGBUILD-core
           pacman -U "${MINGW_PACKAGE_PREFIX}-python-freeze-core-${PKGVER}-${PKGREL}-any.pkg.tar.zst" --noconfirm
+
+      - name: ' Download artifact: python-msilib-sdist'
+        uses: actions/download-artifact@v7
+        with:
+          name: python-msilib-sdist
+
+      - name: '🚧 Build package: python-msilib'
+        run: |
+          PKGVER=$(ls python_msilib-*.tar.gz | awk -F- '{print $2}' | awk -F.tar.gz '{print $1}')
+          PKGREL=9
+          sed -i "s/pkgver=.*/pkgver=$PKGVER/" PKGBUILD-msilib
+          sed -i "s/pkgrel=.*/pkgrel=$PKGREL/" PKGBUILD-msilib
+          makepkg-mingw -sCLf --noconfirm --noprogressbar -p PKGBUILD-msilib
+          pacman -U "${MINGW_PACKAGE_PREFIX}-python-msilib-${PKGVER}-${PKGREL}-any.pkg.tar.zst" --noconfirm
 
       - name: ' Download artifact: cx-freeze-sdist'
         uses: actions/download-artifact@v7

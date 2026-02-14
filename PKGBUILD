@@ -3,6 +3,7 @@
 
 _name=cx_Freeze
 _realname=cx-freeze
+_pyname=${_realname/-/_}
 pkgbase=mingw-w64-python-${_realname}
 pkgname=("${MINGW_PACKAGE_PREFIX}-python-${_realname}")
 pkgver=8.6.0
@@ -11,8 +12,9 @@ pkgdesc="Creates standalone executables from Python scripts, with the same perfo
 arch=('any')
 mingw_arch=('mingw32' 'mingw64' 'ucrt64' 'clang64' 'clangarm64')
 url="https://github.com/marcelotduarte/cx_Freeze/"
+msys2_repository_url='https://github.com/marcelotduarte/cx_Freeze'
 msys2_references=(
-  'pypi: cx-Freeze'
+  'purl: pkg:pypi/cx-freeze'
 )
 license=('spdx:PSF-2.0')
 depends=(
@@ -44,7 +46,7 @@ checkdepends=(
 )
 options=(!strip)
 if [ "$CI" == "true" ]; then
-  source=("file://$startdir/${_realname/-/_}-${pkgver}.tar.gz")
+  source=("file://${startdir}/${_pyname}-${pkgver}.tar.gz")
   sha256sums=(SKIP)
 else
   source=()
@@ -54,12 +56,12 @@ fi
 prepare() {
   if ! [ "$CI" == "true" ]; then
     # Local
-    cd ../../cx_Freeze
-    pkgver=$(grep "__version__ = " cx_Freeze/__init__.py | sed 's/-dev./.dev/' | awk -F\" '{print $2}')
-    python -m build -s -x -n -o "$startdir"
+    cd ../../${name}
+    pkgver=$(grep -m1 "^version = " pyproject.toml | awk -F\" '{print $2}')
+    python -m build -s -x -n -o "${startdir}"
     cd "${srcdir}"
     echo "Extract tar archive"
-    bsdtar -x -v -f "$startdir/${_realname/-/_}-${pkgver}.tar.gz"
+    bsdtar -x -v -f "${startdir}/${_pyname}-${pkgver}.tar.gz"
   fi
 
   cd "${srcdir}/${_name}-${pkgver}"
@@ -72,7 +74,7 @@ prepare() {
 
 pkgver() {
   cd "python-${_realname}-${MSYSTEM}"
-  grep "__version__ = " cx_Freeze/__init__.py | sed 's/-dev./.dev/' | awk -F\" '{print $2}'
+  grep -m1 "^version = " pyproject.toml | awk -F\" '{print $2}'
 }
 
 build() {
@@ -84,12 +86,12 @@ check() {
   cd "python-${_realname}-${MSYSTEM}"
   pip install ${_realname} -f dist --no-deps --no-index
 
-  mkdir -p "${srcdir}/python-test"
-  cp pyproject.toml "${srcdir}/python-test/"
-  cp -a samples "${srcdir}/python-test/samples/"
-  cp -a tests "${srcdir}/python-test/tests/"
+  mkdir -p "${srcdir}/${_realname}-test"
+  cp pyproject.toml "${srcdir}/${_realname}-test/"
+  cp -a samples "${srcdir}/${_realname}-test/samples/"
+  cp -a tests "${srcdir}/${_realname}-test/tests/"
 
-  cd "${srcdir}/python-test"
+  cd "${srcdir}/${_realname}-test"
   if [ "${MINGW_ARCH}" == "mingw32" ]; then
     coverage run -m pytest --dist=loadfile -nauto -k "not hooks" tests
   else
