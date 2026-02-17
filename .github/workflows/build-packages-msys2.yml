@@ -212,7 +212,7 @@ jobs:
           sed -i "s/pkgver=.*/pkgver=$PKGVER/" PKGBUILD
           if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
             makepkg-mingw -sCLf --noconfirm --noprogressbar
-            mv src/python-test/.coverage .coverage.${{ matrix.sys }}
+            mv src/cx-freeze-test/.coverage .coverage.${{ matrix.sys }}
           else
             # do not run check() in workflow_call to speed up the build
             makepkg-mingw -sCLf --noconfirm --noprogressbar --nocheck
