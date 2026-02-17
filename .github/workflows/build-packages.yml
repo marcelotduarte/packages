@@ -80,7 +80,7 @@ jobs:
         working-directory: recipe
         run: |
           pushd cx_Freeze/cx_Freeze
-          VERSION=$(grep "__version__ = " __init__.py | sed 's/-/./' | awk -F\" '{print $2}')
+          VERSION=$(grep -m1 "^version = " pyproject.toml | awk -F\" '{print $2}')
           popd
           sed -i "/set version/c\{% set version = \"$VERSION\" %}" meta.yaml
           sed -i '/number:/c\  number: 0' meta.yaml
@@ -140,7 +140,7 @@ jobs:
     steps:
       - uses: actions/setup-python@v6
         with:
-          python-version: "3.13"
+          python-version: "3.14"
 
       - uses: actions/checkout@v6
         with:
@@ -250,7 +250,7 @@ jobs:
       - uses: conda-incubator/setup-miniconda@v3
         with:
           activate-environment: freeze-index
-          python-version: "3.13"
+          python-version: "3.14"
           channels: conda-forge
 
       - name: Download all conda artifacts
@@ -310,7 +310,7 @@ jobs:
 
       - uses: actions/setup-python@v6
         with:
-          python-version: "3.13"
+          python-version: "3.14"
 
       - name: Preserve make_index script
         run: |
@@ -343,7 +343,7 @@ jobs:
           ); do
             touch `basename $f`
           done
-          rm -rf lief/*-cp38-*.whl
+          rm -rf lief/*-cp38-*.whl lief/*-cp38-*.whl
           cd ..
           # redirected files
           python create_index.py lief --base LIEF
@@ -431,10 +431,10 @@ jobs:
           echo -e "Development packages for MSYS2 [python-cx-freeze](msys2/index.md).\n">>index.md
           echo -e "Development packages for conda-forge [cx_freeze](conda/index.md).\n">>index.md
           if ${{ inputs.build_cx_logging }}; then
-            echo -e "# Packages for cx_Logging 3.2.1 \[Windows\]\[Python 3.13\]\n">>index.md
+            echo -e "# Packages for cx_Logging 3.2.1 \[Windows\]\[Python 3.13+\]\n">>index.md
             echo -e "Unofficial wheels for [cx_Logging](cx-logging/index.md).\n">>index.md
           fi
-          echo -e "# Packages for LIEF \[Windows\]\[Python 3.9-3.13\]\n">>index.md
+          echo -e "# Packages for LIEF \[Windows\]\[Python 3.10-3.14\]\n">>index.md
           echo -e "Development wheels for [LIEF](lief/index.md).\n">>index.md
 
       - name: Publish cx_Freeze packages
