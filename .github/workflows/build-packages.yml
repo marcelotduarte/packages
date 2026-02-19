@@ -79,9 +79,7 @@ jobs:
         id: recipe
         working-directory: recipe
         run: |
-          pushd cx_Freeze/cx_Freeze
-          VERSION=$(grep -m1 "^version = " pyproject.toml | awk -F\" '{print $2}')
-          popd
+          VERSION=$(grep -m1 "^version = " cx_Freeze/pyproject.toml | awk -F\" '{print $2}')
           sed -i "/set version/c\{% set version = \"$VERSION\" %}" meta.yaml
           sed -i '/number:/c\  number: 0' meta.yaml
           sed -i '/patches:/c\  #' meta.yaml
