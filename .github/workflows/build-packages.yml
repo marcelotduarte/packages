@@ -173,7 +173,7 @@ jobs:
       - run: ls -l build_artifacts
 
       - name: Upload the conda artifact
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: cx-freeze-conda-${{ matrix.config.name }}
           path: |
@@ -223,7 +223,7 @@ jobs:
       - run: ls -l build_artifacts
 
       - name: Upload the conda artifact
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: cx-freeze-conda-${{ matrix.config.name }}
           path: |
@@ -274,7 +274,7 @@ jobs:
       - run: ls -l build_artifacts
 
       - name: Upload repository data to the conda artifact
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: cx-freeze-conda
           path: ./build_artifacts/*/*
