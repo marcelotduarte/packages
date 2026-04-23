@@ -194,7 +194,7 @@ jobs:
     runs-on: ${{ matrix.config.os }}-latest
 
     steps:
-      - uses: conda-incubator/setup-miniconda@v3
+      - uses: conda-incubator/setup-miniconda@v4
         with:
           activate-environment: freeze-${{ matrix.config.name }}
           python-version: ${{ matrix.config.version }}
@@ -245,7 +245,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: conda-incubator/setup-miniconda@v3
+      - uses: conda-incubator/setup-miniconda@v4
         with:
           activate-environment: freeze-index
           python-version: "3.14"
