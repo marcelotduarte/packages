@@ -32,7 +32,7 @@ jobs:
     steps:
 
       - name: '🧰 Checkout'
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           ref: ${{ inputs.branch }}
           repository: marcelotduarte/cx_Freeze
@@ -71,7 +71,7 @@ jobs:
     steps:
 
       - name: '🧰 Checkout'
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           #ref: ${{ inputs.branch }}
           repository: marcelotduarte/freeze-core
@@ -110,7 +110,7 @@ jobs:
     steps:
 
       - name: '🧰 Checkout'
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           #ref: ${{ inputs.branch }}
           repository: marcelotduarte/python-msilib
@@ -164,7 +164,7 @@ jobs:
         shell: bash
 
       - name: '🧰 Checkout'
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: '${{ matrix.icon }} Setup MSYS2'
         uses: msys2/setup-msys2@v2
