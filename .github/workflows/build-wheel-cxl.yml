@@ -22,7 +22,7 @@ jobs:
           ref: develop
           repository: marcelotduarte/cx_Logging
 
-      - uses: actions/setup-python@v6
+      - uses: actions/setup-python@v7
         with:
           cache: "pip"
           python-version: "3.14"
