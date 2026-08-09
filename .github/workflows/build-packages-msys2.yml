@@ -20,8 +20,6 @@ on:
 jobs:
 
   build_sdist:
-    strategy:
-      fail-fast: false
     name: Build sdist cx-freeze
     runs-on: ubuntu-latest
     defaults:
@@ -59,8 +57,6 @@ jobs:
           compression-level: 0  # no compression
 
   build_sdist_freeze_core:
-    strategy:
-      fail-fast: false
     name: Build sdist freeze-core
     runs-on: ubuntu-latest
     defaults:
@@ -98,8 +94,6 @@ jobs:
           compression-level: 0  # no compression
 
   build_sdist_msilib:
-    strategy:
-      fail-fast: false
     name: Build sdist python-msilib
     runs-on: ubuntu-latest
     defaults:

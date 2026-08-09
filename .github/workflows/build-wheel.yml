@@ -25,7 +25,7 @@ jobs:
     name: Build wheel
     runs-on: ubuntu-latest
     env:
-      UV_SYSTEM_PYTHON: true
+      UV_NO_PROGRESS: true
     steps:
 
       - uses: actions/checkout@v7
@@ -40,6 +40,7 @@ jobs:
 
       - uses: astral-sh/setup-uv@v7
         with:
+          activate-environment: true
           cache-dependency-glob: "pyproject.toml"
           enable-cache: true
 

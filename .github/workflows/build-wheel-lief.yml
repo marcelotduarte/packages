@@ -5,17 +5,17 @@ on:
   workflow_dispatch:
 
 env:
-  LIEF_TAG: '0.17.1'
-  python-version-sdk: '3.10'
+  LIEF_TAG: "1.0.0"
+  python-version-sdk: "3.10"
   SCCACHE_DIR: 'C:\Users\runner\AppData\Local\Mozilla\sccache'
-  
+
 jobs:
   build-sdk:
     runs-on: windows-2025
     strategy:
       matrix:
         #arch: ['x64', 'x86']
-        arch: ['x64']
+        arch: ["x64"]
       fail-fast: false
     env:
       SCCACHE_CACHE_SIZE: 2G
@@ -91,10 +91,8 @@ jobs:
     needs: build-sdk
     strategy:
       matrix:
-        #arch: ['x64', 'x86']
-        #python-version: ['3.13', '3.13t']
-        arch: ['x64']
-        python-version: ['3.13t', '3.14t']
+        arch: ["x64"]
+        python-version: ["3.14t", "3.15t-dev"]
       fail-fast: false
     env:
       SCCACHE_CACHE_SIZE: 2G
