@@ -4,8 +4,6 @@
 
 Development wheels for [cx_Freeze](cx-freeze/index.md).
 
-Development wheels for [freeze-core](freeze-core/index.md).
-
 Development packages for MSYS2 [python-cx-freeze](msys2/index.md).
 
 Development packages for conda-forge [cx_freeze](conda/index.md).
