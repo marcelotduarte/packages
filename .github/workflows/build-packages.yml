@@ -94,7 +94,8 @@ jobs:
           path: build_artifacts
           name: cx-freeze-conda
 
-      - run: ls -l build_artifacts
+      - name: List of artifacts
+        run: find build_artifacts -name '*'
 
       - name: Install conda index
         run: conda install conda-index
@@ -108,8 +109,8 @@ jobs:
             --subdir win-64 \
             build_artifacts
 
-      - name: List of artifacts
-        run: ls -l build_artifacts/*/*
+      - name: List of artifacts with index
+        run: find build_artifacts -name '*'
 
       - name: Upload repository data to the conda artifact
         uses: actions/upload-artifact@v7
@@ -240,7 +241,10 @@ jobs:
           merge-multiple: true
 
       - name: Create index for python-cx-freeze and python-freeze-core (msys2)
-        run: python create_index.py msys2 --base python-cx-freeze --mask "*.tar.zst"
+        run: >
+          python create_index.py msys2
+          --base "msys2 packages (python-cx-freeze and python-freeze-core)"
+          --mask "*.tar.zst"
 
       - name: Download cx-freeze conda artifacts
         uses: actions/download-artifact@v8
@@ -258,6 +262,7 @@ jobs:
       - name: Create index for cx_freeze and freeze-core (conda)
         run: >
           python create_index.py conda
+          --base "conda-forge (cx_freeze and freeze-core)"
           --mask "cx_freeze*.conda" --mask "cx_freeze*.tar.bz2"
           --mask "freeze-core*.conda" --mask "freeze-core*.tar.bz2"
 
@@ -271,7 +276,8 @@ jobs:
 
           # template
           VERSION=$(ls cx-freeze | (read name; echo $name) | sed 's/-/ /g' | awk '{print $2}')
-          echo -e "# Development packages for cx_Freeze $VERSION\n">index.md
+          echo -e "# Development packages for cx_Freeze\n">index.md
+          echo -e "## Version $VERSION\n">>index.md
           echo -e "Development wheels for [cx_Freeze](cx-freeze/index.md).\n">>index.md
           if ${{ inputs.build_freeze_core }}; then
             echo -e "Development wheels for [freeze-core](freeze-core/index.md).\n">>index.md
@@ -282,7 +288,8 @@ jobs:
             echo -e "# Packages for cx_Logging 3.2.2 \[Windows\]\[Python 3.13+\]\n">>index.md
             echo -e "Unofficial wheels for [cx_Logging](cx-logging/index.md).\n">>index.md
           fi
-          echo -e "# Packages for LIEF \[Windows\]\[Python 3.11-3.15\]\n">>index.md
+          echo -e "# Packages for LIEF \[Windows\]\n">>index.md
+          echo -e "## For Python 3.11-3.15\n">>index.md
           echo -e "Development wheels for [LIEF](lief/index.md).\n">>index.md
 
       - name: Publish cx_Freeze packages
