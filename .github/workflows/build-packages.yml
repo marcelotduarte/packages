@@ -158,11 +158,11 @@ jobs:
 
       - name: Remove old wheels
         run: |
-          git rm -f cx-freeze/* --ignore-unmatch
-          git rm -f cx-logging/* --ignore-unmatch
-          git rm -f freeze-core/* --ignore-unmatch
-          git rm -f conda/* -r --ignore-unmatch
-          git rm -f msys2/* --ignore-unmatch
+          git rm -rf cx-freeze/* --ignore-unmatch
+          git rm -rf cx-logging/* --ignore-unmatch
+          git rm -rf freeze-core/* --ignore-unmatch
+          git rm -rf conda/* --ignore-unmatch
+          git rm -rf msys2/* --ignore-unmatch
 
       - name: Download all lief artifacts
         if: ${{ inputs.build_lief }}
