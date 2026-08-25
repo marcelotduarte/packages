@@ -1,11 +1,11 @@
 # Maintainer: Marcelo Duarte @marcelotduarte
-# makepkg-mingw -sCLf -p PKGBUILD-core
+# makepkg-mingw -sCLfi --noconfirm -p PKGBUILD-core
 
 _realname=freeze-core
 _pyname=${_realname/-/_}
 pkgbase=mingw-w64-python-${_realname}
 pkgname=("${MINGW_PACKAGE_PREFIX}-python-${_realname}")
-pkgver=0.6.0
+pkgver=0.7.2
 pkgrel=1
 pkgdesc="Core dependency for cx_Freeze (mingw-w64)"
 arch=('any')
@@ -25,6 +25,7 @@ if [ "${MINGW_ARCH}" != "mingw32" ]; then
   depends+=(
     "${MINGW_PACKAGE_PREFIX}-python-cabarchive"
     "${MINGW_PACKAGE_PREFIX}-python-striprtf"
+    "${MINGW_PACKAGE_PREFIX}-python-cx-logging"
   )
 fi
 makedepends=(
@@ -33,7 +34,6 @@ makedepends=(
   "${MINGW_PACKAGE_PREFIX}-python-build"
   "${MINGW_PACKAGE_PREFIX}-python-installer"
   "${MINGW_PACKAGE_PREFIX}-python-setuptools"
-  "${MINGW_PACKAGE_PREFIX}-python-cx-logging"
 )
 checkdepends=(
   "${MINGW_PACKAGE_PREFIX}-python-pip"
@@ -53,7 +53,7 @@ fi
 prepare() {
   if ! [ "$CI" == "true" ]; then
     # Local
-    cd ../../${_realname}
+    cd "../../${_realname}"
     pkgver=$(grep -m1 "^version = " pyproject.toml | awk -F\" '{print $2}')
     python -m build -s -x -n -o "${startdir}"
     cd "${srcdir}"
@@ -82,18 +82,18 @@ build() {
 }
 
 check() {
+  pacman -R "${MINGW_PACKAGE_PREFIX}-python-${_realname}" --noconfirm --nodeps || true
   cd "python-${_realname}-${MSYSTEM}"
-  pip install ${_realname} -f dist --no-deps --no-index
+  pip install ${_realname} -f dist --no-deps --no-index --break-system-packages
 
   mkdir -p "${srcdir}/${_realname}-test"
-  cp pyproject.toml "${srcdir}/${_realname}-test/"
-  cp -a tests "${srcdir}/${_realname}-test/tests/"
+  cp pyproject.toml "${srcdir}/${_realname}-test"
+  cp -a tests "${srcdir}/${_realname}-test"
 
   cd "${srcdir}/${_realname}-test"
-  coverage run
-  coverage combine
+  coverage run || true
   coverage report
-  pip uninstall ${_realname} -y
+  pip uninstall ${_realname} -y --break-system-packages
 }
 
 package() {

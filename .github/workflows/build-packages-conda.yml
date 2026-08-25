@@ -1,0 +1,152 @@
+name: Build packages conda
+
+on:
+  workflow_call:
+    inputs:
+      branch:
+        default: develop
+        required: true
+        type: string
+      tests:
+        default: false
+        required: false
+        type: boolean
+  workflow_dispatch:
+    inputs:
+      branch:
+        default: develop
+        required: true
+        type: choice
+        options:
+          - develop
+          - main
+      tests:
+        default: true
+        required: false
+        type: boolean
+
+jobs:
+  build_freeze_core:
+    name: Build freeze-core conda package
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            target-platform: linux-64
+          - os: ubuntu-24.04-arm
+            target-platform: linux-aarch64
+          - os: windows-latest
+            target-platform: win-64
+          - os: macos-15-intel
+            target-platform: osx-64
+          - os: macos-latest
+            target-platform: osx-arm64
+    defaults:
+      run:
+        shell: bash
+    env:
+      python-version: "3.11,3.12"
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+          repository: marcelotduarte/freeze-core-feedstock
+
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+          repository: marcelotduarte/freeze-core
+          path: recipe/freeze-core
+
+      - name: Prepare recipe
+        id: recipe
+        working-directory: recipe
+        run: |
+          pushd freeze-core
+          VERSION=$(grep -m1 "^version = " pyproject.toml | awk -F\" '{print $2}')
+          popd
+          # keep the space before the context variables for distinction
+          sed -i.bkp "s/  version:.*$/  version: $VERSION/" recipe.yaml
+          sed -i.bkp 's/  number:.*$/  number: 0/' recipe.yaml
+          sed -i.bkp 's/coverage run || true/coverage run/' recipe.yaml
+          sed -i.bkp 's|  url:.*$|  path: ./freeze-core|' recipe.yaml
+          sed -i.bkp 's|  sha256:.*$|  #|' recipe.yaml
+          git diff
+
+      - name: Prepare variants
+        working-directory: recipe
+        run: |
+          cat << 'EOF' > conda_build_config.yaml
+          c_stdlib:
+            - sysroot                    # [linux]
+            - macosx_deployment_target   # [osx]
+            - vs                         # [win]
+          c_stdlib_version:              # [unix]
+            - 2.17                       # [linux]
+            - 10.13                      # [osx and x86_64]
+            - 11.0                       # [osx and arm64]
+          MACOSX_SDK_VERSION:            # [osx and x86_64]
+            - "11.0"                     # [osx and x86_64]
+          EOF
+
+      - name: Build conda package
+        uses: prefix-dev/rattler-build-action@v0.2.39
+        with:
+          recipe-path: recipe/recipe.yaml
+          # needs to be unique for each matrix entry
+          artifact-name: freeze-core-conda-${{ matrix.target-platform }}
+          build-args: >
+            --target-platform ${{ matrix.target-platform }} --no-test
+            --variant python=${{ env.python-version }}
+          #  ${{ matrix.target-platform == 'linux-aarch64' && ' --no-test' || '' }}
+
+      - run: find . -name '*.conda' -print
+      - run: find . -name '*.tar.bz2' -print
+
+  build:
+    name: Build cx_freeze conda package
+    needs: [build_freeze_core]
+    runs-on:  ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+          repository: marcelotduarte/cx_freeze-feedstock
+
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+          ref: ${{ inputs.branch }}
+          repository: marcelotduarte/cx_Freeze
+          path: recipe/cx_Freeze
+
+      - name: Prepare recipe
+        id: recipe
+        working-directory: recipe
+        run: |
+          pushd cx_Freeze
+          VERSION=$(grep -m1 "^version = " pyproject.toml | awk -F\" '{print $2}')
+          popd
+          # keep the space before the context variables for distinction
+          sed -i.bkp "s/  version:.*$/  version: $VERSION/" recipe.yaml
+          sed -i.bkp 's/  number:.*$/  number: 0/' recipe.yaml
+          sed -i.bkp 's/coverage run || true/coverage run/' recipe.yaml
+          sed -i.bkp 's|  url:.*$|  path: ./cx_Freeze|' recipe.yaml
+          sed -i.bkp 's|  sha256:.*$|  #|' recipe.yaml
+          git diff
+
+      - name: Build conda package
+        uses: prefix-dev/rattler-build-action@v0.2.39
+        with:
+          recipe-path: recipe/recipe.yaml
+          # needs to be unique for each matrix entry
+          artifact-name: cx-freeze-conda
+          build-args: ${{ inputs.tests == true && '' || '--no-test' }}
+
+      - run: find . -name '*.conda' -print
+      - run: find . -name '*.tar.bz2' -print

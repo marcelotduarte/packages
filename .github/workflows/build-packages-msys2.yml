@@ -7,6 +7,10 @@ on:
         default: develop
         required: true
         type: string
+      tests:
+        default: false
+        required: false
+        type: boolean
   workflow_dispatch:
     inputs:
       branch:
@@ -16,6 +20,10 @@ on:
         options:
           - develop
           - main
+      tests:
+        default: true
+        required: false
+        type: boolean
 
 jobs:
 
@@ -32,6 +40,7 @@ jobs:
       - name: '🧰 Checkout'
         uses: actions/checkout@v7
         with:
+          persist-credentials: false
           ref: ${{ inputs.branch }}
           repository: marcelotduarte/cx_Freeze
 
@@ -41,7 +50,7 @@ jobs:
           python-version: '3.14'
 
       - name: '⚙️ Set up uv'
-        uses: astral-sh/setup-uv@v7
+        uses: astral-sh/setup-uv@20cfd1bf945f4377ade1205e4dbc17946fc9a30d # v10.0.1
         with:
           cache-dependency-glob: "pyproject.toml"
           enable-cache: true
@@ -69,6 +78,7 @@ jobs:
       - name: '🧰 Checkout'
         uses: actions/checkout@v7
         with:
+          persist-credentials: false
           #ref: ${{ inputs.branch }}
           repository: marcelotduarte/freeze-core
 
@@ -78,7 +88,7 @@ jobs:
           python-version: '3.14'
 
       - name: '⚙️ Set up uv'
-        uses: astral-sh/setup-uv@v7
+        uses: astral-sh/setup-uv@20cfd1bf945f4377ade1205e4dbc17946fc9a30d # v10.0.1
         with:
           cache-dependency-glob: "pyproject.toml"
           enable-cache: true
@@ -106,6 +116,7 @@ jobs:
       - name: '🧰 Checkout'
         uses: actions/checkout@v7
         with:
+          persist-credentials: false
           #ref: ${{ inputs.branch }}
           repository: marcelotduarte/python-msilib
 
@@ -115,7 +126,7 @@ jobs:
           python-version: '3.14'
 
       - name: '⚙️ Set up uv'
-        uses: astral-sh/setup-uv@v7
+        uses: astral-sh/setup-uv@20cfd1bf945f4377ade1205e4dbc17946fc9a30d # v10.0.1
         with:
           cache-dependency-glob: "pyproject.toml"
           enable-cache: true
@@ -159,6 +170,8 @@ jobs:
 
       - name: '🧰 Checkout'
         uses: actions/checkout@v7
+        with:
+          persist-credentials: false
 
       - name: '${{ matrix.icon }} Setup MSYS2'
         uses: msys2/setup-msys2@v2
@@ -173,12 +186,18 @@ jobs:
           name: freeze-core-sdist
 
       - name: '🚧 Build package: freeze-core'
+        env:
+          MAKEPKG_LINT_PKGBUILD: 1
         run: |
           PKGVER=$(ls freeze_core-*.tar.gz | awk -F- '{print $2}' | awk -F.tar.gz '{print $1}')
           PKGREL=9
           sed -i "s/pkgver=.*/pkgver=$PKGVER/" PKGBUILD-core
           sed -i "s/pkgrel=.*/pkgrel=$PKGREL/" PKGBUILD-core
-          makepkg-mingw -sCLf --noconfirm --noprogressbar -p PKGBUILD-core
+          if [ "${{ inputs.tests }}" == "true" ]; then
+            makepkg-mingw -sCLf --noconfirm --noprogressbar -p PKGBUILD-core
+          else
+            makepkg-mingw -sCLf --noconfirm --noprogressbar -p PKGBUILD-core --nocheck
+          fi
           pacman -U "${MINGW_PACKAGE_PREFIX}-python-freeze-core-${PKGVER}-${PKGREL}-any.pkg.tar.zst" --noconfirm
 
       - name: ' Download artifact: python-msilib-sdist'
@@ -187,12 +206,18 @@ jobs:
           name: python-msilib-sdist
 
       - name: '🚧 Build package: python-msilib'
+        env:
+          MAKEPKG_LINT_PKGBUILD: 1
         run: |
           PKGVER=$(ls python_msilib-*.tar.gz | awk -F- '{print $2}' | awk -F.tar.gz '{print $1}')
           PKGREL=9
           sed -i "s/pkgver=.*/pkgver=$PKGVER/" PKGBUILD-msilib
           sed -i "s/pkgrel=.*/pkgrel=$PKGREL/" PKGBUILD-msilib
-          makepkg-mingw -sCLf --noconfirm --noprogressbar -p PKGBUILD-msilib
+          if [ "${{ inputs.tests }}" == "true" ]; then
+            makepkg-mingw -sCLf --noconfirm --noprogressbar -p PKGBUILD-msilib
+          else
+            makepkg-mingw -sCLf --noconfirm --noprogressbar -p PKGBUILD-msilib --nocheck
+          fi
           pacman -U "${MINGW_PACKAGE_PREFIX}-python-msilib-${PKGVER}-${PKGREL}-any.pkg.tar.zst" --noconfirm
 
       - name: ' Download artifact: cx-freeze-sdist'
@@ -201,14 +226,15 @@ jobs:
           name: cx-freeze-sdist
 
       - name: '🚧 Build package: cx-freeze'
+        env:
+          MAKEPKG_LINT_PKGBUILD: 1
         run: |
           PKGVER=$(ls cx_freeze-*.tar.gz | awk -F- '{print $2}' | awk -F.tar.gz '{print $1}')
           sed -i "s/pkgver=.*/pkgver=$PKGVER/" PKGBUILD
-          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+          if [ "${{ inputs.tests }}" == "true" ]; then
             makepkg-mingw -sCLf --noconfirm --noprogressbar
             mv src/cx-freeze-test/.coverage .coverage.${{ matrix.sys }}
           else
-            # do not run check() in workflow_call to speed up the build
             makepkg-mingw -sCLf --noconfirm --noprogressbar --nocheck
           fi
 
@@ -221,7 +247,7 @@ jobs:
             mingw-w64-*.zst.sig
 
       - name: '📤 Upload artifact: coverage'
-        if: github.event_name == 'workflow_dispatch'
+        if: inputs.tests == true
         uses: actions/upload-artifact@v7
         with:
           name: cx-freeze-msys2-${{ matrix.sys }}-coverage
