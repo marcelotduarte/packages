@@ -1,4 +1,4 @@
-## Links for conda
+## Links for conda-forge (cx_freeze and freeze-core)
 
 [linux-64/cx_freeze-8.7.1.dev1787536666-h81b34b9_0.conda](https://marcelotduarte.github.io/packages/conda/linux-64/cx_freeze-8.7.1.dev1787536666-h81b34b9_0.conda)
 

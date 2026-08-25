@@ -1,4 +1,4 @@
-## Links for python-cx-freeze
+## Links for msys2 packages (python-cx-freeze and python-freeze-core)
 
 [mingw-w64-clang-aarch64-python-cx-freeze-8.7.1.dev1787536666-1-any.pkg.tar.zst](https://marcelotduarte.github.io/packages/msys2/mingw-w64-clang-aarch64-python-cx-freeze-8.7.1.dev1787536666-1-any.pkg.tar.zst)
 
