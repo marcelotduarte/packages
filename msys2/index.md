@@ -1,21 +1,31 @@
 ## Links for python-cx-freeze
 
-[mingw-w64-clang-aarch64-python-cx-freeze-8.6.0.dev1769483151-1-any.pkg.tar.zst](https://marcelotduarte.github.io/packages/msys2/mingw-w64-clang-aarch64-python-cx-freeze-8.6.0.dev1769483151-1-any.pkg.tar.zst)
+[mingw-w64-clang-aarch64-python-cx-freeze-8.7.1.dev1787536666-1-any.pkg.tar.zst](https://marcelotduarte.github.io/packages/msys2/mingw-w64-clang-aarch64-python-cx-freeze-8.7.1.dev1787536666-1-any.pkg.tar.zst)
 
-[mingw-w64-clang-aarch64-python-freeze-core-0.5.0-9-any.pkg.tar.zst](https://marcelotduarte.github.io/packages/msys2/mingw-w64-clang-aarch64-python-freeze-core-0.5.0-9-any.pkg.tar.zst)
+[mingw-w64-clang-aarch64-python-freeze-core-0.7.2-9-any.pkg.tar.zst](https://marcelotduarte.github.io/packages/msys2/mingw-w64-clang-aarch64-python-freeze-core-0.7.2-9-any.pkg.tar.zst)
 
-[mingw-w64-clang-x86_64-python-cx-freeze-8.6.0.dev1769483151-1-any.pkg.tar.zst](https://marcelotduarte.github.io/packages/msys2/mingw-w64-clang-x86_64-python-cx-freeze-8.6.0.dev1769483151-1-any.pkg.tar.zst)
+[mingw-w64-clang-aarch64-python-msilib-0.7.0-9-any.pkg.tar.zst](https://marcelotduarte.github.io/packages/msys2/mingw-w64-clang-aarch64-python-msilib-0.7.0-9-any.pkg.tar.zst)
 
-[mingw-w64-clang-x86_64-python-freeze-core-0.5.0-9-any.pkg.tar.zst](https://marcelotduarte.github.io/packages/msys2/mingw-w64-clang-x86_64-python-freeze-core-0.5.0-9-any.pkg.tar.zst)
+[mingw-w64-clang-x86_64-python-cx-freeze-8.7.1.dev1787536666-1-any.pkg.tar.zst](https://marcelotduarte.github.io/packages/msys2/mingw-w64-clang-x86_64-python-cx-freeze-8.7.1.dev1787536666-1-any.pkg.tar.zst)
 
-[mingw-w64-i686-python-cx-freeze-8.6.0.dev1769483151-1-any.pkg.tar.zst](https://marcelotduarte.github.io/packages/msys2/mingw-w64-i686-python-cx-freeze-8.6.0.dev1769483151-1-any.pkg.tar.zst)
+[mingw-w64-clang-x86_64-python-freeze-core-0.7.2-9-any.pkg.tar.zst](https://marcelotduarte.github.io/packages/msys2/mingw-w64-clang-x86_64-python-freeze-core-0.7.2-9-any.pkg.tar.zst)
 
-[mingw-w64-i686-python-freeze-core-0.5.0-9-any.pkg.tar.zst](https://marcelotduarte.github.io/packages/msys2/mingw-w64-i686-python-freeze-core-0.5.0-9-any.pkg.tar.zst)
+[mingw-w64-clang-x86_64-python-msilib-0.7.0-9-any.pkg.tar.zst](https://marcelotduarte.github.io/packages/msys2/mingw-w64-clang-x86_64-python-msilib-0.7.0-9-any.pkg.tar.zst)
 
-[mingw-w64-ucrt-x86_64-python-cx-freeze-8.6.0.dev1769483151-1-any.pkg.tar.zst](https://marcelotduarte.github.io/packages/msys2/mingw-w64-ucrt-x86_64-python-cx-freeze-8.6.0.dev1769483151-1-any.pkg.tar.zst)
+[mingw-w64-i686-python-cx-freeze-8.7.1.dev1787536666-1-any.pkg.tar.zst](https://marcelotduarte.github.io/packages/msys2/mingw-w64-i686-python-cx-freeze-8.7.1.dev1787536666-1-any.pkg.tar.zst)
 
-[mingw-w64-ucrt-x86_64-python-freeze-core-0.5.0-9-any.pkg.tar.zst](https://marcelotduarte.github.io/packages/msys2/mingw-w64-ucrt-x86_64-python-freeze-core-0.5.0-9-any.pkg.tar.zst)
+[mingw-w64-i686-python-freeze-core-0.7.2-9-any.pkg.tar.zst](https://marcelotduarte.github.io/packages/msys2/mingw-w64-i686-python-freeze-core-0.7.2-9-any.pkg.tar.zst)
 
-[mingw-w64-x86_64-python-cx-freeze-8.6.0.dev1769483151-1-any.pkg.tar.zst](https://marcelotduarte.github.io/packages/msys2/mingw-w64-x86_64-python-cx-freeze-8.6.0.dev1769483151-1-any.pkg.tar.zst)
+[mingw-w64-i686-python-msilib-0.7.0-9-any.pkg.tar.zst](https://marcelotduarte.github.io/packages/msys2/mingw-w64-i686-python-msilib-0.7.0-9-any.pkg.tar.zst)
 
-[mingw-w64-x86_64-python-freeze-core-0.5.0-9-any.pkg.tar.zst](https://marcelotduarte.github.io/packages/msys2/mingw-w64-x86_64-python-freeze-core-0.5.0-9-any.pkg.tar.zst)
+[mingw-w64-ucrt-x86_64-python-cx-freeze-8.7.1.dev1787536666-1-any.pkg.tar.zst](https://marcelotduarte.github.io/packages/msys2/mingw-w64-ucrt-x86_64-python-cx-freeze-8.7.1.dev1787536666-1-any.pkg.tar.zst)
+
+[mingw-w64-ucrt-x86_64-python-freeze-core-0.7.2-9-any.pkg.tar.zst](https://marcelotduarte.github.io/packages/msys2/mingw-w64-ucrt-x86_64-python-freeze-core-0.7.2-9-any.pkg.tar.zst)
+
+[mingw-w64-ucrt-x86_64-python-msilib-0.7.0-9-any.pkg.tar.zst](https://marcelotduarte.github.io/packages/msys2/mingw-w64-ucrt-x86_64-python-msilib-0.7.0-9-any.pkg.tar.zst)
+
+[mingw-w64-x86_64-python-cx-freeze-8.7.1.dev1787536666-1-any.pkg.tar.zst](https://marcelotduarte.github.io/packages/msys2/mingw-w64-x86_64-python-cx-freeze-8.7.1.dev1787536666-1-any.pkg.tar.zst)
+
+[mingw-w64-x86_64-python-freeze-core-0.7.2-9-any.pkg.tar.zst](https://marcelotduarte.github.io/packages/msys2/mingw-w64-x86_64-python-freeze-core-0.7.2-9-any.pkg.tar.zst)
+
+[mingw-w64-x86_64-python-msilib-0.7.0-9-any.pkg.tar.zst](https://marcelotduarte.github.io/packages/msys2/mingw-w64-x86_64-python-msilib-0.7.0-9-any.pkg.tar.zst)
