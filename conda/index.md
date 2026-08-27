@@ -1,7 +1,5 @@
 ## Links for conda-forge (cx_freeze and freeze-core)
 
-[linux-64/cx_freeze-8.7.1.dev1787536666-h81b34b9_0.conda](https://marcelotduarte.github.io/packages/conda/linux-64/cx_freeze-8.7.1.dev1787536666-h81b34b9_0.conda)
-
 [linux-64/freeze-core-0.7.2-py311hc48c5a3_0.conda](https://marcelotduarte.github.io/packages/conda/linux-64/freeze-core-0.7.2-py311hc48c5a3_0.conda)
 
 [linux-64/freeze-core-0.7.2-py312h0b80b57_0.conda](https://marcelotduarte.github.io/packages/conda/linux-64/freeze-core-0.7.2-py312h0b80b57_0.conda)
@@ -17,6 +15,8 @@
 [linux-aarch64/freeze-core-0.7.2-py313h8d0fdab_0.conda](https://marcelotduarte.github.io/packages/conda/linux-aarch64/freeze-core-0.7.2-py313h8d0fdab_0.conda)
 
 [linux-aarch64/freeze-core-0.7.2-py314hcc44d7a_0.conda](https://marcelotduarte.github.io/packages/conda/linux-aarch64/freeze-core-0.7.2-py314hcc44d7a_0.conda)
+
+[noarch/cx_freeze-8.7.1.dev1787536666-pyhb8b06df_0.conda](https://marcelotduarte.github.io/packages/conda/noarch/cx_freeze-8.7.1.dev1787536666-pyhb8b06df_0.conda)
 
 [osx-64/freeze-core-0.7.2-py311h02c6bdc_0.conda](https://marcelotduarte.github.io/packages/conda/osx-64/freeze-core-0.7.2-py311h02c6bdc_0.conda)
 
