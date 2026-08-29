@@ -16,7 +16,7 @@
 
 [linux-aarch64/freeze-core-0.7.2-py314hcc44d7a_0.conda](https://marcelotduarte.github.io/packages/conda/linux-aarch64/freeze-core-0.7.2-py314hcc44d7a_0.conda)
 
-[noarch/cx_freeze-8.7.1.dev1787898831-pyhb8b06df_0.conda](https://marcelotduarte.github.io/packages/conda/noarch/cx_freeze-8.7.1.dev1787898831-pyhb8b06df_0.conda)
+[noarch/cx_freeze-8.7.1.dev1788002743-pyhb8b06df_0.conda](https://marcelotduarte.github.io/packages/conda/noarch/cx_freeze-8.7.1.dev1788002743-pyhb8b06df_0.conda)
 
 [osx-64/freeze-core-0.7.2-py311h02c6bdc_0.conda](https://marcelotduarte.github.io/packages/conda/osx-64/freeze-core-0.7.2-py311h02c6bdc_0.conda)
 
