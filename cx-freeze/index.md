@@ -1,5 +1,5 @@
 ## Links for cx_Freeze
 
-[cx_freeze-8.7.1.dev1789622260-py3-none-any.whl](https://marcelotduarte.github.io/packages/cx-freeze/cx_freeze-8.7.1.dev1789622260-py3-none-any.whl)
+[cx_freeze-8.7.1.dev1789872637-py3-none-any.whl](https://marcelotduarte.github.io/packages/cx-freeze/cx_freeze-8.7.1.dev1789872637-py3-none-any.whl)
 
-[cx_freeze-8.7.1.dev1789622260.tar.gz](https://marcelotduarte.github.io/packages/cx-freeze/cx_freeze-8.7.1.dev1789622260.tar.gz)
+[cx_freeze-8.7.1.dev1789872637.tar.gz](https://marcelotduarte.github.io/packages/cx-freeze/cx_freeze-8.7.1.dev1789872637.tar.gz)
