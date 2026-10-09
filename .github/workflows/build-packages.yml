@@ -48,7 +48,7 @@ jobs:
     uses: ./.github/workflows/build-packages-conda.yml
     with:
       branch: develop
-      #build_freeze_core: ${{ inputs.build_freeze_core }}
+      build_freeze_core: ${{ inputs.build_freeze_core }}
 
   build_msys2:
     name: Build msys2 packages
