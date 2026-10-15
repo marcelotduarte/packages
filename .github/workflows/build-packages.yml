@@ -30,18 +30,21 @@ on:
         required: false
         type: boolean
 
-jobs:
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
 
+permissions:
+  contents: read
+
+jobs:
   build_freeze_core:
     name: Build wheels for freeze-core
     if: ${{ inputs.build_freeze_core }}
-    uses: marcelotduarte/freeze-core/.github/workflows/build.yml@main
-
-  build_wheel:
-    name: Build wheel for cx_Freeze
-    uses: ./.github/workflows/build-wheel.yml
-    with:
-      branch: develop
+    uses: marcelotduarte/freeze-core/.github/workflows/build-wheel.yml@main
+    permissions:
+      contents: read
+      id-token: write # Required for nested job 'publish'
 
   build_conda:
     name: Build conda packages for freeze-core and cx_freeze
@@ -66,8 +69,20 @@ jobs:
     if: ${{ inputs.build_lief }}
     uses: ./.github/workflows/build-wheel-lief.yml
 
+  build_cx_freeze:
+    name: Build wheel for cx_Freeze
+    uses: marcelotduarte/cx_Freeze/.github/workflows/build-wheel.yml@main
+    with:
+      branch: develop
+    permissions:
+      contents: read
+      id-token: write # Required for nested job 'publish'
+    needs:
+      - build_msys2
+
   build_conda_index:
-    needs: [build_conda]
+    needs:
+      - build_conda
     name: Conda index
     defaults:
       run:
@@ -122,12 +137,7 @@ jobs:
     name: Update packages repository
     needs:
       - build_conda_index
-      # to wait for all artifacts
-      - build_msys2
-      - build_wheel
-      #- build_freeze_core
-      #- build_wheel_cx_logging
-      #- build_wheel_lief
+      - build_cx_freeze
     env:
       LIEF_LINK: https://lief.s3-website.fr-par.scw.cloud/latest
       PACKAGES: https://marcelotduarte.github.io/packages

@@ -25,125 +25,36 @@ on:
         required: false
         type: boolean
 
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: false
+  queue: max
+
+permissions:
+  contents: read
+
 jobs:
-
-  build_sdist:
-    name: Build sdist cx-freeze
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        shell: bash
-    env:
-      UV_SYSTEM_PYTHON: true
-    steps:
-
-      - name: '🧰 Checkout'
-        uses: actions/checkout@v7
-        with:
-          persist-credentials: false
-          ref: ${{ inputs.branch }}
-          repository: marcelotduarte/cx_Freeze
-
-      - name: '⚙️ Set up Python'
-        uses: actions/setup-python@v7
-        with:
-          python-version: '3.14'
-
-      - name: '⚙️ Set up uv'
-        uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
-        with:
-          cache-dependency-glob: "pyproject.toml"
-          enable-cache: true
-
-      - name: '🚧 Build source distribution'
-        run: uv build --sdist -o wheelhouse
-
-      - name: '📤 Upload artifact: sdist'
-        uses: actions/upload-artifact@v7
-        with:
-          name: cx-freeze-sdist
-          path: wheelhouse
-          compression-level: 0  # no compression
-
   build_sdist_freeze_core:
-    name: Build sdist freeze-core
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        shell: bash
-    env:
-      UV_SYSTEM_PYTHON: true
-    steps:
-
-      - name: '🧰 Checkout'
-        uses: actions/checkout@v7
-        with:
-          persist-credentials: false
-          repository: marcelotduarte/freeze-core
-
-      - name: '⚙️ Set up Python'
-        uses: actions/setup-python@v7
-        with:
-          python-version: '3.14'
-
-      - name: '⚙️ Set up uv'
-        uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
-        with:
-          cache-dependency-glob: "pyproject.toml"
-          enable-cache: true
-
-      - name: '🚧 Build source distribution'
-        run: uv build --sdist -o wheelhouse
-
-      - name: '📤 Upload artifact: sdist'
-        uses: actions/upload-artifact@v7
-        with:
-          name: freeze-core-sdist
-          path: wheelhouse
-          compression-level: 0  # no compression
+    name: Build sdist for freeze-core
+    uses: marcelotduarte/freeze-core/.github/workflows/build-sdist.yml@main
 
   build_sdist_msilib:
-    name: Build sdist python-msilib
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        shell: bash
-    env:
-      UV_SYSTEM_PYTHON: true
-    steps:
+    name: Build sdist for python-msilib
+    uses: marcelotduarte/python-msilib/.github/workflows/build-sdist.yml@main
+    needs:
+      - build_sdist_freeze_core
 
-      - name: '🧰 Checkout'
-        uses: actions/checkout@v7
-        with:
-          persist-credentials: false
-          repository: marcelotduarte/python-msilib
-
-      - name: '⚙️ Set up Python'
-        uses: actions/setup-python@v7
-        with:
-          python-version: '3.14'
-
-      - name: '⚙️ Set up uv'
-        uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
-        with:
-          cache-dependency-glob: "pyproject.toml"
-          enable-cache: true
-
-      - name: '🚧 Build source distribution'
-        run: uv build --sdist -o wheelhouse
-
-      - name: '📤 Upload artifact: sdist'
-        uses: actions/upload-artifact@v7
-        with:
-          name: python-msilib-sdist
-          path: wheelhouse
-          compression-level: 0  # no compression
+  build_sdist_cx_freeze:
+    name: Build sdist for cx_Freeze
+    uses: marcelotduarte/cx_Freeze/.github/workflows/build-sdist.yml@main
+    with:
+      branch: ${{ inputs.branch }}
+    needs:
+      - build_sdist_msilib
 
   build_msys2:
     needs:
-      - build_sdist
-      - build_sdist_freeze_core
-      - build_sdist_msilib
+      - build_sdist_cx_freeze
     strategy:
       fail-fast: false
       matrix:
@@ -166,7 +77,7 @@ jobs:
         shell: bash
 
       - name: '🧰 Checkout'
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
 
@@ -183,8 +94,6 @@ jobs:
           name: freeze-core-sdist
 
       - name: '🚧 Build package: freeze-core'
-        env:
-          MAKEPKG_LINT_PKGBUILD: 1
         run: |
           PKGVER=$(ls freeze_core-*.tar.gz | awk -F- '{print $2}' | awk -F.tar.gz '{print $1}')
           PKGREL=9
@@ -203,8 +112,6 @@ jobs:
           name: python-msilib-sdist
 
       - name: '🚧 Build package: python-msilib'
-        env:
-          MAKEPKG_LINT_PKGBUILD: 1
         run: |
           PKGVER=$(ls python_msilib-*.tar.gz | awk -F- '{print $2}' | awk -F.tar.gz '{print $1}')
           PKGREL=9
@@ -223,8 +130,6 @@ jobs:
           name: cx-freeze-sdist
 
       - name: '🚧 Build package: cx-freeze'
-        env:
-          MAKEPKG_LINT_PKGBUILD: 1
         run: |
           PKGVER=$(ls cx_freeze-*.tar.gz | awk -F- '{print $2}' | awk -F.tar.gz '{print $1}')
           sed -i "s/pkgver=.*/pkgver=$PKGVER/" PKGBUILD
